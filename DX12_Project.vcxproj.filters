@@ -1,37 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Game">
+    <Filter Include="src">
+      <UniqueIdentifier>{f1b92198-e3c6-4dec-8d74-c0f979b73e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{b1106cd0-ef19-4922-bf49-97075fe760d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System\Library">
+      <UniqueIdentifier>{67ee4192-8853-4cc3-9d42-04aaca5c080a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
       <UniqueIdentifier>{537df921-fad6-46ed-baa1-1840c0b6d3d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{ec0a9760-a215-4ac6-985f-9201ed5063ab}</UniqueIdentifier>
+    <Filter Include="data">
+      <UniqueIdentifier>{e9cfd55c-34ac-4aed-bacf-71c09da94205}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{b1106cd0-ef19-4922-bf49-97075fe760d4}</UniqueIdentifier>
+    <Filter Include="data\Shader">
+      <UniqueIdentifier>{ec0a9760-a215-4ac6-985f-9201ed5063ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\define.h" />
-    <ClInclude Include="src\main.h" />
-    <ClInclude Include="src\System\Direct3D12.h">
-      <Filter>System</Filter>
+    <ClInclude Include="src\main.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\Direct3D12.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\Helper.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\ResourceFactory.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\define.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\GameWindow.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pch.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Helper.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\ResourceFactory.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Direct3D12.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameWindow.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\Shader\BasicPixelShader.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>data\Shader</Filter>
     </FxCompile>
     <FxCompile Include="data\Shader\BasicVertexShader.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>data\Shader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Shader\BasicShaderHeader.hlsli">
-      <Filter>Shader</Filter>
+      <Filter>data\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>

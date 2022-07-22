@@ -80,7 +80,7 @@ namespace {
 
 HRESULT Direct3D12::CreateDepthStencilView() {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
-	auto result = _swapchain->GetDesc1(&desc);
+	auto result = SwapChain->GetDesc1(&desc);
 	//深度バッファ作成
 	//深度バッファの仕様
 	//auto depthResDesc = CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_D32_FLOAT,
@@ -136,7 +136,7 @@ HRESULT Direct3D12::CreateDepthStencilView() {
 	_dev->CreateDepthStencilView(_depthBuffer.Get(), &dsvDesc, _dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
-smart_ptr<ID3D12Resource> Direct3D12::GetTextureByPath(const char* texpath) {
+shared_ptr<ID3D12Resource> Direct3D12::GetTextureByPath(const char* texpath) {
 	auto it = _textureTable.find(texpath);
 	if (it != _textureTable.end()) {
 		//テーブルに内にあったらロードするのではなくマップ内の
@@ -144,14 +144,13 @@ smart_ptr<ID3D12Resource> Direct3D12::GetTextureByPath(const char* texpath) {
 		return _textureTable[texpath];
 	}
 	else {
-		return smart_ptr<ID3D12Resource>(CreateTextureFromFile(texpath));
+		return shared_ptr<ID3D12Resource>(CreateTextureFromFile(texpath));
 	}
 
 }
 
 //テクスチャローダテーブルの作成
-void
-Direct3D12::CreateTextureLoaderTable() {
+void Direct3D12::CreateTextureLoaderTable() {
 	_loadLambdaTable["sph"] = _loadLambdaTable["spa"] = _loadLambdaTable["bmp"] = _loadLambdaTable["png"] = _loadLambdaTable["jpg"] = [](const wstring& path, TexMetadata* meta, ScratchImage& img)->HRESULT {
 		return LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, meta, img);
 	};
@@ -164,9 +163,9 @@ Direct3D12::CreateTextureLoaderTable() {
 		return LoadFromDDSFile(path.c_str(), DDS_FLAGS_NONE, meta, img);
 	};
 }
+
 //テクスチャ名からテクスチャバッファ作成、中身をコピー
-ID3D12Resource*
-Direct3D12::CreateTextureFromFile(const char* texpath) {
+ID3D12Resource* Direct3D12::CreateTextureFromFile(const char* texpath) {
 	string texPath = texpath;
 	//テクスチャのロード
 	TexMetadata metadata = {};
@@ -308,8 +307,7 @@ HRESULT Direct3D12::InitializeCommand() {
 }
 
 //ビュープロジェクション用ビューの生成
-HRESULT
-Direct3D12::CreateSceneView() {
+HRESULT Direct3D12::CreateSceneView() {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	auto result = _swapchain->GetDesc1(&desc);
 
@@ -363,7 +361,7 @@ Direct3D12::CreateSceneView() {
 
 HRESULT Direct3D12::CreateFinalRenderTargets() {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
-	auto hr = _swapchain->GetDesc1(&desc);
+	auto hr = SwapChain->GetDesc1(&desc);
 
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
 	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;//レンダーターゲットビューなので当然RTV
