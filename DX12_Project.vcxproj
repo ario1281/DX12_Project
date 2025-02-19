@@ -19,12 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\define.h" />
+    <ClInclude Include="src\Game\GameWindow.h" />
     <ClInclude Include="src\main.h" />
-    <ClInclude Include="src\System\Direct3D12.h" />
+    <ClInclude Include="src\Pch.h" />
+    <ClInclude Include="src\System\Library\define.h" />
+    <ClInclude Include="src\System\Library\Direct3D12.h" />
+    <ClInclude Include="src\System\Library\Helper.h" />
+    <ClInclude Include="src\System\Library\ResourceFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\GameWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Pch.cpp" />
+    <ClCompile Include="src\System\Library\Direct3D12.cpp" />
+    <ClCompile Include="src\System\Library\Helper.cpp" />
+    <ClCompile Include="src\System\Library\ResourceFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\Shader\BasicPixelShader.hlsl">

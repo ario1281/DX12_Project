@@ -5,7 +5,7 @@ class Direct3D12
 {
 public:
 	HRESULT CreateDepthStencilView();
-	shared_ptr<ID3D12Resource> GetTextureByPath(const char* texpath);
+	std::shared_ptr<ID3D12Resource> GetTextureByPath(const char* texpath);
 	HRESULT InitializeDXGIDevice();
 	HRESULT CreateSwapChain(const HWND& hwnd);
 	HRESULT InitializeCommand();

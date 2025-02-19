@@ -24,8 +24,8 @@
     <ClInclude Include="src\main.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\Direct3D12.h">
-      <Filter>src\System\Library</Filter>
+    <ClInclude Include="src\Pch.h">
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\System\Library\Helper.h">
       <Filter>src\System\Library</Filter>
@@ -36,15 +36,18 @@
     <ClInclude Include="src\System\Library\define.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Library\Direct3D12.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
     <ClInclude Include="src\Game\GameWindow.h">
       <Filter>src\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Pch.h">
-      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\Helper.cpp">
@@ -58,9 +61,6 @@
     </ClCompile>
     <ClCompile Include="src\Game\GameWindow.cpp">
       <Filter>src\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Pch.cpp">
-      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@
 #include <math.h>
 #include <commctrl.h>
 
+using namespace std;
 using namespace Microsoft::WRL;
 
 /*################################################

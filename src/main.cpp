@@ -1335,13 +1335,15 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpszCmdParam, int nCm
 	 /*===================================================================
 		 ウィンドウ作成
 	 ===================================================================*/
-	 if(!m_Window.Create(_hInit, _cmdShow, _w, _h, "window"))
+	 if (!m_Window.Create(_hInit, _cmdShow, _w, _h, "window")) { return; }
  }
 
  void System::Loop()
  {
+
  }
 
  void System::Release()
  {
+
  }

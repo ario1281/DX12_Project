@@ -72,7 +72,7 @@ namespace {
 	}
 	///デバッグレイヤーを有効にする
 	void EnableDebugLayer() {
-		smart_ptr<ID3D12Debug> debugLayer = nullptr;
+		std::smart_ptr<ID3D12Debug> debugLayer = nullptr;
 		auto result = D3D12GetDebugInterface(IID_PPV_ARGS(&debugLayer));
 		debugLayer->EnableDebugLayer();
 	}

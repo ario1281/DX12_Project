@@ -7,7 +7,7 @@
 class System
 {
 public:
-	bool System::Init(HINSTANCE _hInst, int _cmdShow, int _w, int _h);
+	bool Init(HINSTANCE _hInst, int _cmdShow, int _w, int _h);
 	void Loop();
 	void Release();
 	void EndGame() { m_EndFlg = true;  }
