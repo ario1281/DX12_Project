@@ -263,4 +263,4 @@ __pycache__/
 *.pyc
 
 # original file
-.data/
+data/
