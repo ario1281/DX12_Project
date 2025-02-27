@@ -18,9 +18,7 @@ public:
 
 	void SetClientSize(int w, int h);
 
-	~GameWindow() {
-		Release();
-	}
+	~GameWindow() { Release(); }
 
 private:
 	HWND	m_hWnd = nullptr;

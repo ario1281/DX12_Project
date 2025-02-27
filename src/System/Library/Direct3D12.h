@@ -1,34 +1,39 @@
 #pragma once
-#include"define.h"
 
-class Direct3D12
-{
-public:
-	HRESULT CreateDepthStencilView();
-	std::shared_ptr<ID3D12Resource> GetTextureByPath(const char* texpath);
-	HRESULT InitializeDXGIDevice();
-	HRESULT CreateSwapChain(const HWND& hwnd);
-	HRESULT InitializeCommand();
-	HRESULT CreateSceneView();
-	HRESULT CreateFinalRenderTargets();
-
+class Direct3D12 {
 private:
-	IDXGIFactory6* Factory = nullptr;
-	ID3D12Device* Device = nullptr;
-	ID3D12CommandAllocator* cmdAllocator = nullptr;
-	ID3D12GraphicsCommandList* cmdList = nullptr;
-	ID3D12CommandQueue* cmdQueue = nullptr;
-	IDXGISwapChain4* SwapChain = nullptr;
+	IDXGIFactory6* m_Factory	= nullptr;
+	IDXGIAdapter* m_Adapter		= nullptr;
+	ID3D12Device* m_Device		= nullptr;
+
+	ID3D12CommandAllocator*	m_CmdAllocator	= nullptr;
+	ID3D12GraphicsCommandList* m_CmdList	= nullptr;
+	ID3D12CommandQueue* m_CmdQueue			= nullptr;
+	IDXGISwapChain4* m_SwapChain			= nullptr;
+
+	D3D_FEATURE_LEVEL m_Level;
+
+	void DebugLayer();
+
+	HRESULT InitializeDXGIDevice();
+	HRESULT InitializeD3D12Command();
+
+	HRESULT CreateSwapChain(const HWND &hwnd, int h, int w);
+	HRESULT CreateFinalRenderTarget();
+
 
 public:
-	static Direct3D12& GetInstance()
-	{
+
+	bool Init(HINSTANCE hInst, HWND hwnd, int h, int w);
+
+
+public:
+	static Direct3D12& GetInstance() {
 		static Direct3D12 instance;
 		return instance;
 	}
 private:
-	Direct3D12() { }
-	~Direct3D12() { }
+	Direct3D12() {}
 };
 
-#define D3D12 Direct3D12::GetInstance()
+#define DX12 Direct3D12::GetInstance()

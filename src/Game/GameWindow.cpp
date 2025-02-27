@@ -1,4 +1,4 @@
-#include"..\System\Library\define.h"
+#include "main.h"
 #include"GameWindow.h"
 
 bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const std::string& _wndName)
@@ -182,4 +182,5 @@ LRESULT GameWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		// メッセージのデフォルト処理
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
+	return 0;
 }
