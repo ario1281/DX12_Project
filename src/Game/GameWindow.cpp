@@ -27,8 +27,9 @@ bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const st
 
 	if (!RegisterClassEx(&wc)) return false;
 
-	m_hWnd = CreateWindowEx(WS_EX_CLIENTEDGE,
-		wc.lpszClassName, "3Dゲームプログラミング",
+	m_hWnd = CreateWindow(
+		wc.lpszClassName,
+		"3Dゲームプログラミング",
 		WS_OVERLAPPEDWINDOW - WS_THICKFRAME,
 		CW_USEDEFAULT, CW_USEDEFAULT, _w, _h,
 		nullptr,

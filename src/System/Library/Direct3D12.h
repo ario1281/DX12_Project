@@ -24,7 +24,7 @@ private:
 
 public:
 
-	bool Init(HINSTANCE hInst, HWND hwnd, int h, int w);
+	bool Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen);
 
 
 public:

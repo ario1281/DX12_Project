@@ -13,16 +13,13 @@ void Direct3D12::DebugLayer()
 #endif // !NDEBUG
 }
 
-bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int h, int w)
+bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
-    HRESULT hr;
-    hr = InitializeDXGIDevice();
-    if (FAILED(hr)) { return false; }
+    if (FAILED(InitializeDXGIDevice())) { return false; }
 
-    hr = InitializeD3D12Command();
-    if (FAILED(hr)) { return false; }
+    if (FAILED(InitializeD3D12Command())) { return false; }
 
-    hr = CreateSwapChain(hwnd, h, w);
+    if (FAILED(CreateSwapChain(hwnd, h, w))) { return false; }
 
 
     return true;
