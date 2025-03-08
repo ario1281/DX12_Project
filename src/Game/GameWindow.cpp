@@ -1,7 +1,7 @@
 #include "main.h"
 #include"GameWindow.h"
 
-bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const std::string& _wndName)
+bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const string& _wndName)
 {
 	/*===================================================================
 		メインウィンドウ作成
@@ -9,7 +9,7 @@ bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const st
 
 #pragma region ウィンドウクラスの定義
 
-	WNDCLASSEX wc;
+	WNDCLASSEX wc = {};
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;
 	wc.lpfnWndProc = &GameWindow::callWndProc;
@@ -25,7 +25,7 @@ bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const st
 
 #pragma endregion
 
-	if (!RegisterClassEx(&wc)) return false;
+	if (!RegisterClassEx(&wc)) { return false; }
 
 	m_hWnd = CreateWindow(
 		wc.lpszClassName,
@@ -35,13 +35,14 @@ bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const st
 		nullptr,
 		nullptr,
 		_hInst,
-		this);
+		this
+	);
 
-	if (m_hWnd == nullptr) return false;
+	if (m_hWnd == nullptr) { return false; }
 
 	SetClientSize(_w, _h);
 
-	ShowWindow(m_hWnd, _cmdShow);
+	ShowWindow(m_hWnd, _showCmd);
 
 	UpdateWindow(m_hWnd);
 
@@ -52,7 +53,8 @@ bool GameWindow::Create(HINSTANCE _hInst, int _cmdShow, int _w, int _h, const st
 
 void GameWindow::Release()
 {
-	if (m_hWnd) {
+	if (m_hWnd)
+	{
 		DestroyWindow(m_hWnd);
 		m_hWnd = nullptr;
 	}
@@ -88,8 +90,8 @@ void GameWindow::SetClientSize(int _w, int _h)
 		rcWnd.top,// Y座標
 		_w + (rcWnd.right - rcWnd.left) - (rcCli.right - rcCli.left),
 		_h + (rcWnd.bottom - rcWnd.top) - (rcCli.bottom - rcCli.top),
-		TRUE);
-
+		TRUE
+	);
 }
 
 LRESULT GameWindow::callWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

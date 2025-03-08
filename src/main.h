@@ -43,17 +43,19 @@ private:
 	bool m_sceneFlg = false;
 
 
-	//=====================================================
-	// シングルトンパターン
-	//=====================================================
+#pragma region シングルトン
 public:
-	static System& GetInstance() {
+	static System& GetInstance()
+	{
 		static System instance;
 		return instance;
 	}
 
 private:
 	System() {};
+
+#pragma endregion
+
 };
 
 #define APP System::GetInstance()

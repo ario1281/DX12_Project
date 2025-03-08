@@ -1,20 +1,11 @@
 #include "define.h"
 #include "Direct3D12.h"
 
-void Direct3D12::DebugLayer()
-{
-#ifndef NDEBUG
-    ID3D12Debug* debug = nullptr;
-    if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debug))))
-    {
-        debug->EnableDebugLayer();
-        debug->Release();
-    }
-#endif // !NDEBUG
-}
-
 bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
+    //=======================================================
+    // デバイスの作成
+    //=======================================================
     if (FAILED(InitializeDXGIDevice())) { return false; }
 
     if (FAILED(InitializeD3D12Command())) { return false; }

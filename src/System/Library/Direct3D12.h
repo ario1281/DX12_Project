@@ -1,6 +1,10 @@
 #pragma once
 
-class Direct3D12 {
+class Direct3D12
+{
+public:
+	bool Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen);
+
 private:
 	IDXGIFactory6* m_Factory	= nullptr;
 	IDXGIAdapter* m_Adapter		= nullptr;
@@ -13,8 +17,6 @@ private:
 
 	D3D_FEATURE_LEVEL m_Level;
 
-	void DebugLayer();
-
 	HRESULT InitializeDXGIDevice();
 	HRESULT InitializeD3D12Command();
 
@@ -22,18 +24,18 @@ private:
 	HRESULT CreateFinalRenderTarget();
 
 
-public:
-
-	bool Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen);
-
-
+#pragma region ƒVƒ“ƒOƒ‹ƒgƒ“
 public:
 	static Direct3D12& GetInstance() {
 		static Direct3D12 instance;
 		return instance;
 	}
+
 private:
 	Direct3D12() {}
+
+#pragma endregion
+
 };
 
 #define DX12 Direct3D12::GetInstance()

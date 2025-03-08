@@ -10,7 +10,7 @@ public:
 	bool GetAnyKeyFlag()const { return m_AnyKeyFlg; }
 	bool GetMouseFlag()const { return m_MouseFlg; }
 
-	bool Create(HINSTANCE _hInst, int cmdShow, int clientWidth, int clientHeight, const std::string& wndName);
+	bool Create(HINSTANCE _hInst, int _showCmd, int clientWidth, int clientHeight, const std::string& _wndName);
 
 	void Release();
 
