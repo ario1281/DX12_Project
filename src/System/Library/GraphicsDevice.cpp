@@ -82,12 +82,12 @@ void GraphicsDevice::ScreenFlip()
 	);
 
 	// レンダーターゲットをセット
-	auto rtvHeap = m_pRTVHeap->GetRTVCPUHandle(bbIdx);
-	m_pCmdList->OMSetRenderTargets(1, &rtvHeap, false, nullptr);
+	auto rtvH = m_pRTVHeap->GetRTVCPUHandle(bbIdx);
+	m_pCmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
 	// セットしたレンダーターゲットの画面をクリア
-	float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-	m_pCmdList->ClearRenderTargetView(rtvHeap, clearColor, 0, nullptr);
+	float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };//黄色
+	m_pCmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
 
 	// リソースバリアのステートをプレゼントに戻す
 	SetResourceBarrier(
@@ -95,6 +95,9 @@ void GraphicsDevice::ScreenFlip()
 		D3D12_RESOURCE_STATE_RENDER_TARGET,
 		D3D12_RESOURCE_STATE_PRESENT
 	);
+
+	// 命令のクローズ
+	m_pCmdList->Close();
 
 	// コマンドリストを閉じて実行
 	ID3D12CommandList* cmdlists[] = { m_pCmdList.Get() };
@@ -112,9 +115,8 @@ void GraphicsDevice::ScreenFlip()
 }
 
 void GraphicsDevice::WaitForCommandQueue()
-
 {
-	m_pCmdQueue->Signal(m_pFence.Get(), m_fenceVal++);
+	m_pCmdQueue->Signal(m_pFence.Get(), ++m_fenceVal);
 
 	if (m_pFence->GetCompletedValue() != m_fenceVal)
 	{
@@ -128,6 +130,7 @@ void GraphicsDevice::WaitForCommandQueue()
 		CloseHandle(event);									// イベントハンドルを閉じる
 	}
 }
+
 
 
 bool GraphicsDevice::CreateFactory()
@@ -154,7 +157,7 @@ bool GraphicsDevice::CreateDevice()
 		D3D_FEATURE_LEVEL_11_0,
 	};
 
-    for (UINT i = 0; true; i++)
+    for (UINT i = 0; 1; ++i)
     {
         pAdapters.push_back(nullptr);
         auto hr = m_pDxgiFactory->EnumAdapters(i, &pAdapters[i]);
@@ -257,6 +260,7 @@ bool GraphicsDevice::CreateSwapChain(HWND hwnd, int width, int height)
 	desc.Height				= height;
 	desc.Format				= DXGI_FORMAT_R8G8B8A8_UNORM;
 	desc.SampleDesc.Count	= 1;
+	desc.SampleDesc.Quality = 0;
 	desc.BufferUsage		= DXGI_USAGE_BACK_BUFFER;
 	desc.BufferCount		= 2;
 	desc.SwapEffect			= DXGI_SWAP_EFFECT_FLIP_DISCARD;			// フリップ後は速やかに破棄
@@ -274,7 +278,7 @@ bool GraphicsDevice::CreateSwapChain(HWND hwnd, int width, int height)
 
 bool GraphicsDevice::CreateSwapChainRTV()
 {
-	for (int i = 0; i < (int)m_pSwapChainBuffers.size(); i++)
+	for (size_t i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
 	{
 		auto hr = m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffers[i]));
 		if (FAILED(hr)) { return false; }
@@ -301,4 +305,3 @@ void GraphicsDevice::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURC
 	barrier.Transition.StateBefore	= before;
 	m_pCmdList->ResourceBarrier(1, &barrier);
 }
-

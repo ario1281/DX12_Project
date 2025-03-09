@@ -39,14 +39,16 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 	//　フルスクリーン確認
 	//===================================================================
 	bool fullScreen = false;
-	if (MessageBox(nullptr,"フルスクリーンにしますか？", "確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES) {
+	if (MessageBox(nullptr,"フルスクリーンにしますか？", "確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES)
+	{
 		fullScreen = true;
 	}
 
 	//===================================================================
 	// ウィンドウ作成
 	//===================================================================
-	if (!m_Window.Create(_hInst, _showCmd, _w, _h, "Window")) {
+	if (!m_Window.Create(_hInst, _showCmd, _w, _h, "Window"))
+	{
 		assert(0 && "ウィンドウ作成失敗");
 		return false;
 	}
@@ -54,7 +56,8 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 	//===================================================================
 	// 　Direct3D初期化
 	//===================================================================
-	if (!DX12.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen)) {
+	if (!DX12.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen))
+	{
 		assert(0 && "Direct3D初期化失敗");
 		return false;
 	}

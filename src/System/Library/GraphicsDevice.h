@@ -10,9 +10,9 @@ public:
 	void WaitForCommandQueue();
 
 
-	ID3D12Device8* GetDevice()const { return m_pDevice.Get(); }
+	ID3D12Device8* GetDevice() const { return m_pDevice.Get(); }
 
-	ID3D12GraphicsCommandList6* GetCmdList()const { return m_pCmdList.Get(); }
+	ID3D12GraphicsCommandList6* GetCmdList() const { return m_pCmdList.Get(); }
 
 private:
 	bool CreateFactory();
