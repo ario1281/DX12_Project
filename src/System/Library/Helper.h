@@ -1,5 +1,15 @@
 #pragma once
 
+void DebugLog(const char* format, ...)
+{
+#ifdef _DEBUG
+	va_list valist;
+	va_start(valist, format);
+	vprintf(format, valist);
+	va_end(valist);
+#endif
+}
+
 template<class T>
 void SafeRelease(T*& p) {
 	if (p) {
@@ -17,18 +27,5 @@ void SafeDelete(T*& p) {
 
 #define SafeClear(p) (p).clear()
 
-void DebugLog(const char* format, ...)
-{
-#ifdef _DEBUG
-	va_list valist;
-	va_start(valist, format);
-	vprintf(format, valist);
-	va_end(valist);
-#endif
-}
-
 template<class T>
-using shared_ptr = std::shared_ptr<T>;
-
-template<class T>
-using weak_ptr = std::weak_ptr<T>;
+using com_ptr = Microsoft::WRL::ComPtr<T>;

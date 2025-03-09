@@ -1,7 +1,7 @@
 #pragma once
 //===============================================
 //　
-//　Base
+//　基本
 //　
 //===============================================
 #define	SCRW		1280	// ウィンドウ幅（Width
@@ -9,38 +9,33 @@
 
 #pragma comment(lib, "winmm.lib")
 
-#include <windows.h>
-#include <stdio.h>
-#include <math.h>
-#include <commctrl.h>
-#include <tchar.h>
+#include<windows.h>
+#include<stdio.h>
+#include<math.h>
+#include<commctrl.h>
+#include<ctime>
+
+#include<wrl/client.h>
 
 using namespace std;
+
 
 //===============================================
 //　
 //　DirectX12
 //　
 //===============================================
-#include<d3d12.h>
-#include<d3dx12.h>
-#include<dxgi1_6.h>
-#include<dxgidebug.h>
-#include<DirectXMath.h>
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "dxgi.lib")
 
-#include<d3dcompiler.h>
-#include<DirectXTex.h>
+#include <d3d12.h>
+#include <dxgi1_6.h>
 
-#pragma comment(lib,"d3d12.lib")
-#pragma comment(lib,"dxgi.lib")
-#pragma comment(lib,"d3dcompiler.lib")
+#pragma comment(lib, "DirectXTK12.lib")
+#include <SimpleMath.h>
 
-#pragma comment(lib, "DirectXTex.lib")
+namespace Math = DirectX::SimpleMath;
 
-using namespace DirectX;
-
-using XMVECTOR3 = XMFLOAT3;
-using XMVECTOR2 = XMFLOAT2;
 
 //===============================================
 //　
@@ -49,6 +44,7 @@ using XMVECTOR2 = XMFLOAT2;
 //===============================================
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
 #include <array>
 #include <vector>
@@ -67,19 +63,18 @@ using XMVECTOR2 = XMFLOAT2;
 #include <atomic>
 #include <mutex>
 #include <future>
+#include <fileSystem>
+#include <chrono>
+
 
 /*===============================================
 //　
-//　Other
+//　その他
 //　
 //===============================================*/
-
 #include "Helper.h"
 
-#include "Direct3D12.h"
+#include "Heap/RTVHeap.h"
 
-//===============================================
-//　
-//　static
-//　
-//===============================================
+#include "GraphicsDevice.h"
+
