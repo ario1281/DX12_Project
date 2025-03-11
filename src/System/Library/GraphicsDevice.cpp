@@ -12,7 +12,11 @@ bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscr
 		return false;
 	}
 
-    //=======================================================
+#ifdef _DEBUG
+	EnableDebugLayer();
+#endif
+	
+	//=======================================================
     // デバイスの作成
     //=======================================================
     if (!CreateDevice())
@@ -43,7 +47,7 @@ bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscr
 	// ヒープの作成
 	//=======================================================
 	m_pRTVHeap = make_unique<RTVHeap>();
-	if (!m_pRTVHeap->Create(m_pDevice.Get(), 100))
+	if (!m_pRTVHeap->Create(this, HeapType::RTV, 100))
 	{
 		assert(0 && "RTVヒープの作成失敗");
 		return false;
@@ -82,7 +86,7 @@ void GraphicsDevice::ScreenFlip()
 	);
 
 	// レンダーターゲットをセット
-	auto rtvH = m_pRTVHeap->GetRTVCPUHandle(bbIdx);
+	auto rtvH = m_pRTVHeap->GetCPUHandle(bbIdx);
 	m_pCmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
 	// セットしたレンダーターゲットの画面をクリア
@@ -99,7 +103,7 @@ void GraphicsDevice::ScreenFlip()
 	// 命令のクローズ
 	m_pCmdList->Close();
 
-	// コマンドリストを閉じて実行
+	// コマンドリストの実行
 	ID3D12CommandList* cmdlists[] = { m_pCmdList.Get() };
 	m_pCmdQueue->ExecuteCommandLists(1, cmdlists);
 
@@ -278,7 +282,7 @@ bool GraphicsDevice::CreateSwapChain(HWND hwnd, int width, int height)
 
 bool GraphicsDevice::CreateSwapChainRTV()
 {
-	for (size_t i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
+	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
 	{
 		auto hr = m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffers[i]));
 		if (FAILED(hr)) { return false; }
@@ -304,4 +308,13 @@ void GraphicsDevice::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURC
 	barrier.Transition.StateAfter	= after;
 	barrier.Transition.StateBefore	= before;
 	m_pCmdList->ResourceBarrier(1, &barrier);
+}
+
+void GraphicsDevice::EnableDebugLayer()
+{
+	ID3D12Debug* pDebugLayer = nullptr;
+
+	D3D12GetDebugInterface(IID_PPV_ARGS(&pDebugLayer));
+	pDebugLayer->EnableDebugLayer();	// デバッグレイヤーを有効にする
+	pDebugLayer->Release();
 }

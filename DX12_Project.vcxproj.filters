@@ -19,9 +19,6 @@
     <Filter Include="src\Game">
       <UniqueIdentifier>{537df921-fad6-46ed-baa1-1840c0b6d3d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\System\Library\Heap">
-      <UniqueIdentifier>{5031d0e5-b6e0-4b7d-bcf0-e454edd47668}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\main.h">
@@ -31,9 +28,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\System\Library\Helper.h">
-      <Filter>src\System\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\Library\define.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\GameWindow.h">
@@ -48,8 +42,11 @@
     <ClInclude Include="src\Game\SceneBase.h">
       <Filter>src\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\Heap\RTVHeap.h">
-      <Filter>src\System\Library\Heap</Filter>
+    <ClInclude Include="src\System\Library\Heap.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\define.h">
+      <Filter>src\System\Library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +71,8 @@
     <ClCompile Include="src\Game\SceneBase.cpp">
       <Filter>src\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\Heap\RTVHeap.cpp">
-      <Filter>src\System\Library\Heap</Filter>
+    <ClCompile Include="src\System\Library\Heap.cpp">
+      <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +87,5 @@
     <None Include="data\Shader\BasicShaderHeader.hlsli">
       <Filter>data\Shader</Filter>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

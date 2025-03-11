@@ -17,7 +17,7 @@
     <ClInclude Include="src\Pch.h" />
     <ClInclude Include="src\System\Library\define.h" />
     <ClInclude Include="src\System\Library\GraphicsDevice.h" />
-    <ClInclude Include="src\System\Library\Heap\RTVHeap.h" />
+    <ClInclude Include="src\System\Library\Heap.h" />
     <ClInclude Include="src\System\Library\Helper.h" />
     <ClInclude Include="src\System\Library\Model.h" />
   </ItemGroup>
@@ -31,7 +31,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\System\Library\GraphicsDevice.cpp" />
-    <ClCompile Include="src\System\Library\Heap\RTVHeap.cpp" />
+    <ClCompile Include="src\System\Library\Heap.cpp" />
     <ClCompile Include="src\System\Library\Helper.cpp" />
     <ClCompile Include="src\System\Library\Model.cpp" />
   </ItemGroup>
@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Shader\BasicShaderHeader.hlsli" />
-    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -168,13 +167,5 @@
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\directxtk12_uwp.2024.10.29.1\build\native\directxtk12_uwp.targets" Condition="Exists('packages\directxtk12_uwp.2024.10.29.1\build\native\directxtk12_uwp.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\directxtk12_uwp.2024.10.29.1\build\native\directxtk12_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk12_uwp.2024.10.29.1\build\native\directxtk12_uwp.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

@@ -1,11 +1,11 @@
 #pragma once
 //===============================================
-//　
-//　基本
-//　
+//  
+//  基本
+//  
 //===============================================
-#define	SCRW		1280	// ウィンドウ幅（Width
-#define	SCRH		720		// ウィンドウ高さ（Height
+#define	SCRW		1280	// Screen Width
+#define	SCRH		720		// Screen Height
 
 #pragma comment(lib, "winmm.lib")
 
@@ -19,28 +19,10 @@
 
 using namespace std;
 
-
 //===============================================
-//　
-//　DirectX12
-//　
-//===============================================
-#pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "dxgi.lib")
-
-#include <d3d12.h>
-#include <dxgi1_6.h>
-
-#pragma comment(lib, "DirectXTK12.lib")
-#include <SimpleMath.h>
-
-namespace Math = DirectX::SimpleMath;
-
-
-//===============================================
-//　
-//　STL
-//　
+//  
+//  STL
+//  
 //===============================================
 #include <map>
 #include <unordered_map>
@@ -67,14 +49,36 @@ namespace Math = DirectX::SimpleMath;
 #include <chrono>
 
 
-/*===============================================
-//　
-//　その他
-//　
-//===============================================*/
-#include "Helper.h"
+//===============================================
+//  
+//  DirectX12
+//  
+//===============================================
+#include <d3d12.h>
+#include <d3dx12.h>
+#include <dxgi1_6.h>
+#include <dxgidebug.h>
+#include <DirectXMath.h>
 
-#include "Heap/RTVHeap.h"
+#include <d3dcompiler.h>
+#include <DirectXTex.h>
+
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+#pragma comment(lib,"DirectXTex.lib")
+
+
+//===============================================
+//  
+//  Other
+//  
+//===============================================
+#include "Helper.h"
 
 #include "GraphicsDevice.h"
 
+#include "Heap.h"
+
+#include "GraphicsDevice.h"

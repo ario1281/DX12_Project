@@ -1,5 +1,7 @@
 #pragma once
 
+class RTVHeap;
+
 class GraphicsDevice
 {
 public:
@@ -9,19 +11,32 @@ public:
 
 	void WaitForCommandQueue();
 
+#pragma region アクセサー
 
 	ID3D12Device8* GetDevice() const { return m_pDevice.Get(); }
 
 	ID3D12GraphicsCommandList6* GetCmdList() const { return m_pCmdList.Get(); }
 
+#pragma endregion
+
 private:
 	bool CreateFactory();
 	bool CreateDevice();
+
 	bool CreateCommandList();
+
 	bool CreateSwapChain(HWND hwnd, int width, int height);
 	bool CreateSwapChainRTV();
+
 	bool CreateFence();
-	void SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after);
+
+	void SetResourceBarrier(
+		ID3D12Resource* pResource,
+		D3D12_RESOURCE_STATES before,
+		D3D12_RESOURCE_STATES after
+	);
+
+	void EnableDebugLayer();
 
 	enum class GPUTier
 	{

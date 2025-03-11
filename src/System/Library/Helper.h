@@ -11,21 +11,12 @@ void DebugLog(const char* format, ...)
 }
 
 template<class T>
-void SafeRelease(T*& p) {
-	if (p) {
-		p->Release();
-		p = nullptr;
-	}
-}
-template<class T>
-void SafeDelete(T*& p) {
-	if (p) {
-		delete p;
-		p = nullptr;
-	}
-}
-
-#define SafeClear(p) (p).clear()
-
-template<class T>
 using com_ptr = Microsoft::WRL::ComPtr<T>;
+
+using  XMVECTOR3 = DirectX::XMFLOAT3;
+using  XMVECTOR2 = DirectX::XMFLOAT2;
+
+struct VERTEX {
+	XMVECTOR3 pos;	// XYZç¿ïW
+	XMVECTOR2 uv;	// UVç¿ïW
+};
