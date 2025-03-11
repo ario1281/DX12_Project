@@ -66,7 +66,7 @@ private:
 		return useCount;
 	}
 
-	UINT ComputeUseCount(XMVECTOR3 useCount)
+	UINT ComputeUseCount(XMFLOAT3 useCount)
 	{
 		return (UINT)(useCount.x + useCount.y + useCount.z);
 	}
@@ -90,7 +90,7 @@ public:
 	int CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format);
 };
 
-class CSUHeap : public Heap<XMVECTOR3>
+class CSUHeap : public Heap<XMFLOAT3>
 {
 	CSUHeap() {}
 	~CSUHeap() {}
@@ -104,5 +104,5 @@ class CSUHeap : public Heap<XMVECTOR3>
 
 	ID3D12DescriptorHeap* GetHeap() { return m_pHeap.Get(); }
 
-	const XMVECTOR3& GetUseCount() { return m_useCount; }
+	const XMFLOAT3& GetUseCount() { return m_useCount; }
 };

@@ -19,7 +19,9 @@
     <ClInclude Include="src\System\Library\GraphicsDevice.h" />
     <ClInclude Include="src\System\Library\Heap.h" />
     <ClInclude Include="src\System\Library\Helper.h" />
+    <ClInclude Include="src\System\Library\Math.h" />
     <ClInclude Include="src\System\Library\Model.h" />
+    <ClInclude Include="src\System\Library\TrailPolygon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\GameWindow.cpp" />
@@ -33,7 +35,9 @@
     <ClCompile Include="src\System\Library\GraphicsDevice.cpp" />
     <ClCompile Include="src\System\Library\Heap.cpp" />
     <ClCompile Include="src\System\Library\Helper.cpp" />
+    <ClCompile Include="src\System\Library\Math.cpp" />
     <ClCompile Include="src\System\Library\Model.cpp" />
+    <ClCompile Include="src\System\Library\TrailPolygon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\Shader\BasicPixelShader.hlsl">

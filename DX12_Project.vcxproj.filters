@@ -48,6 +48,12 @@
     <ClInclude Include="src\System\Library\define.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Library\TrailPolygon.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\Math.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -72,6 +78,12 @@
       <Filter>src\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\Heap.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\TrailPolygon.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Math.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

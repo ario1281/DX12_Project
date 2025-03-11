@@ -69,6 +69,8 @@ using namespace std;
 
 #pragma comment(lib,"DirectXTex.lib")
 
+using namespace DirectX;
+
 
 //===============================================
 //  
@@ -76,9 +78,9 @@ using namespace std;
 //  
 //===============================================
 #include "Helper.h"
+#include "Math.h"
+
+#include "TrailPolygon.h"
 
 #include "GraphicsDevice.h"
-
 #include "Heap.h"
-
-#include "GraphicsDevice.h"

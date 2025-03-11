@@ -1,4 +1,4 @@
-
+#include "define.h"
 #include "Heap.h"
 
 int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
