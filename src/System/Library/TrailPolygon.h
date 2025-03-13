@@ -9,13 +9,13 @@ public:
 
 #pragma region s—ñ‚ğ’Ç‰Á
 	// æ“ª
-	void AddMatrix_Front(const XMMATRIX& mat)
+	void AddMatrix_Front(const Matrix& mat)
 	{
 		m_matList.push_front(mat);
 	}
 
 	// ––”ö
-	void AddMatrix_Back(const XMMATRIX& mat)
+	void AddMatrix_Back(const Matrix& mat)
 	{
 		m_matList.push_back(mat);
 	}
@@ -54,5 +54,5 @@ public:
 #pragma endregion
 
 private:
-	deque<XMMATRIX> m_matList;
+	deque<Matrix> m_matList;
 };

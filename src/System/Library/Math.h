@@ -17,11 +17,52 @@ public:
 	Vector3(const XMFLOAT3& v) {
 		*(XMFLOAT3*)this = v;
 	}
+
 	// 代入演算子(オペレータオーバーロード)
 	Vector3& operator=(const XMFLOAT3& v) {
 		*(XMFLOAT3*)this = v;
 		return *this;
 	}
+
+	Vector3 operator += (const Vector3& v) {
+		x += v.x; y += v.y; z += v.z;
+		return *this;
+	}
+	Vector3 operator -= (const Vector3& v) {
+		x -= v.x; y -= v.y; z -= v.z;
+		return *this;
+	}
+	Vector3 operator *= (float f) {
+		x *= f; y *= f; z *= f;
+		return *this;
+	}
+	Vector3 operator /= (float f){
+		float fInv = 1.0f / f;
+		x *= f; y *= f; z *= f;
+		return *this;
+	}
+
+	Vector3 operator + () const {
+		return *this;
+	}
+	Vector3 operator - () const {
+		return Vector3(-x, -y, -z);
+	}
+
+	Vector3 operator + (const Vector3& v) const {
+		return Vector3(x + v.x, y + v.y, z + v.z);
+	}
+	Vector3 operator - (const Vector3& v) const {
+		return Vector3(x - v.x, y - v.y, z - v.z);
+	}
+	Vector3 operator * (float f) const {
+		return Vector3(x * f, y * f, z * f);
+	}
+	Vector3 operator / (float f) const {
+		float fInv = 1.0f / f;
+		return Vector3(x * fInv, y * fInv, z * fInv);
+	}
+
 
 	void Set(float _x, float _y, float _z) {
 		x = _x;
@@ -69,6 +110,7 @@ public:
 		return *this;
 	}
 
+
 	//===========================
 	// 「作成」系
 	//===========================
@@ -100,6 +142,7 @@ public:
 	void CreateScaling(float x, float y, float z) {
 		*this = XMMatrixScaling(x, y, z);
 	}
+
 
 	//===========================
 	// 「操作」系
@@ -222,8 +265,5 @@ public:
 	float GetZScale() const {
 		return GetZAxis().Length();
 	}
-
-
-
 
 };
