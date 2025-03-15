@@ -107,17 +107,27 @@ public:
 //===================================================================
 class CSUHeap : public BaseHeap<DXVECTOR3>
 {
+public:
 	CSUHeap() {}
 	~CSUHeap() {}
 
 	int CreateSRV(ID3D12Resource* pBuffer);
 
-	const D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(int number)override;
+#pragma region アクセサー
 
+	// ゲッター
+	const D3D12_GPU_DESCRIPTOR_HANDLE
+	GetGPUHandle(int number) override;
+
+	ID3D12DescriptorHeap*
+	GetHeap() { return m_pHeap.Get(); }
+
+	const DXVECTOR3&
+	GetUseCount() { return m_useCount; }
+
+	// セッター
 	void SetHeap();
 
+#pragma endregion
 
-	ID3D12DescriptorHeap* GetHeap() { return m_pHeap.Get(); }
-
-	const DXVECTOR3& GetUseCount() { return m_useCount; }
 };

@@ -19,7 +19,7 @@ public:
 	/// <summary>
 	/// アニメーションの分割数を設定
 	/// </summary>
-	void SetAnimationInfo(int splitX, float splitY)
+	void SetAnimationInfo(int splitX, int splitY)
 	{
 		m_anmSplitX = splitX;
 		m_anmSplitY = splitY;
