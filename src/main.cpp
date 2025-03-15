@@ -39,7 +39,8 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 	//　フルスクリーン確認
 	//===================================================================
 	bool fullScreen = false;
-	if (MessageBox(nullptr,"フルスクリーンにしますか？", "確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES)
+	long caption = MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2;
+	if (MessageBox(nullptr, "フルスクリーンにしますか？", "確認", caption) == IDYES)
 	{
 		fullScreen = true;
 	}
@@ -110,13 +111,15 @@ void System::Loop()
 		// 処理終了時間Get
 		DWORD et = timeGetTime();
 		// Fps制御
-		if (et - st < 16) {
+		if (et - st < 16)
+		{
 			Sleep(16 - (et - st));	// 速すぎたら待つ
 		}
 
 		// FPS計測
 		count++;
-		if (st - baseTime >= 1000) {
+		if (st - baseTime >= 1000)
+		{
 			m_Fps = (count * 1000) / (st - baseTime);
 			baseTime = st;
 			count = 0;

@@ -48,10 +48,10 @@
     <ClInclude Include="src\System\Library\define.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\TrailPolygon.h">
+    <ClInclude Include="src\System\Library\Math.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\Math.h">
+    <ClInclude Include="src\System\Library\SquarePolygon.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,10 +80,10 @@
     <ClCompile Include="src\System\Library\Heap.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\TrailPolygon.cpp">
+    <ClCompile Include="src\System\Library\Math.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\Math.cpp">
+    <ClCompile Include="src\System\Library\SquarePolygon.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

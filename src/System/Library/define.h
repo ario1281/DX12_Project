@@ -9,13 +9,13 @@
 
 #pragma comment(lib, "winmm.lib")
 
-#include<windows.h>
-#include<stdio.h>
-#include<math.h>
-#include<commctrl.h>
-#include<ctime>
+#include <windows.h>
+#include <stdio.h>
+#include <math.h>
+#include <commctrl.h>
+#include <ctime>
 
-#include<wrl/client.h>
+#include <wrl/client.h>
 
 using namespace std;
 
@@ -80,7 +80,7 @@ using namespace DirectX;
 #include "Helper.h"
 #include "Math.h"
 
-#include "TrailPolygon.h"
+#include "SquarePolygon.h"
 
 #include "GraphicsDevice.h"
 #include "Heap.h"

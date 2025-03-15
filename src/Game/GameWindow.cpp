@@ -10,17 +10,17 @@ bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const st
 #pragma region ウィンドウクラスの定義
 
 	WNDCLASSEX wc = {};
-	wc.cbSize = sizeof(WNDCLASSEX);
-	wc.style = 0;
-	wc.lpfnWndProc = &GameWindow::callWndProc;
-	wc.cbClsExtra = 0;
-	wc.cbWndExtra = 0;
-	wc.hInstance = _hInst;
-	wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
-	wc.hIconSm = LoadIcon(nullptr, IDI_APPLICATION);
-	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wc.cbSize        = sizeof(WNDCLASSEX);
+	wc.style         = 0;
+	wc.lpfnWndProc   = &GameWindow::callWndProc;
+	wc.cbClsExtra    = 0;
+	wc.cbWndExtra    = 0;
+	wc.hInstance     = _hInst;
+	wc.hIcon         = LoadIcon(nullptr, IDI_APPLICATION);
+	wc.hIconSm       = LoadIcon(nullptr, IDI_APPLICATION);
+	wc.hCursor       = LoadCursor(nullptr, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wc.lpszMenuName = nullptr;
+	wc.lpszMenuName  = nullptr;
 	wc.lpszClassName = _wndName.c_str();
 
 #pragma endregion

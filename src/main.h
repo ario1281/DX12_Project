@@ -11,7 +11,7 @@
 //===========================
 // その他
 //===========================
-#include"Game\GameWindow.h"
+#include"Game/GameWindow.h"
 
 class System
 {
@@ -19,7 +19,7 @@ public:
 	bool Init(HINSTANCE _hInst, int _cmdShow, int _w, int _h);
 	void Loop();
 	void Release();
-	void EndGame() { m_EndFlg = true;  }
+	void EndGame() { m_EndFlg = true; }
 
 	//=================================================
 	// 公開データ
@@ -32,14 +32,14 @@ public:
 	// グローバルデータ
 	//=================================================
 
-	HINSTANCE	m_hInst = nullptr;	// インスタンスハンドル
-	DWORD		m_FrameCnt = 0;		// 現在フレーム地
-	int			m_Fps = 0;			// FPS値
+	HINSTANCE  m_hInst = nullptr; // インスタンスハンドル
+	DWORD      m_FrameCnt = 0;    // 現在フレーム地
+	int        m_Fps = 0;         // FPS値
 
 private:
 
 	// ゲーム終了フラグ
-	bool m_EndFlg = false;
+	bool m_EndFlg   = false;
 	bool m_sceneFlg = false;
 
 

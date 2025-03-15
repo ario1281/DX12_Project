@@ -2,36 +2,36 @@
 
 enum class HeapType
 {
+	RTV     = D3D12_DESCRIPTOR_HEAP_TYPE_RTV,
+	DSV     = D3D12_DESCRIPTOR_HEAP_TYPE_DSV,
+	CSU     = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
 	SAMPLER = D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER,
-	CSU = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
-	RTV = D3D12_DESCRIPTOR_HEAP_TYPE_RTV,
-	DSV = D3D12_DESCRIPTOR_HEAP_TYPE_DSV,
 };
 
 template<typename TempHeap>
-class Heap
+class BaseHeap
 {
 public:
-	Heap() {}
-	~Heap() {}
+	BaseHeap() {}
+	~BaseHeap() {}
 
 	bool Create(GraphicsDevice* pDevice, HeapType heapType, TempHeap useCount)
 	{
 		auto type = static_cast<D3D12_DESCRIPTOR_HEAP_TYPE>(heapType);
 
 		D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
-		heapDesc.Type = type;
-		heapDesc.NodeMask = 0;
+		heapDesc.Type           = type;
+		heapDesc.NodeMask       = 0;
 		heapDesc.NumDescriptors = ComputeUseCount(useCount);
-		heapDesc.Flags = heapType == HeapType::CSU ?
+		heapDesc.Flags          = heapType == HeapType::CSU ?
 			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 		auto hr = pDevice->GetDevice()->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
 		if (FAILED(hr)) { return false; }
 
-		m_useCount = useCount;
+		m_useCount      = useCount;
 		m_incrementSize = pDevice->GetDevice()->GetDescriptorHandleIncrementSize(type);
-		m_pDevice = pDevice;
+		m_pDevice       = pDevice;
 
 		return true;
 	}
@@ -66,13 +66,18 @@ private:
 		return useCount;
 	}
 
-	UINT ComputeUseCount(XMFLOAT3 useCount)
+	UINT ComputeUseCount(DXVECTOR3 useCount)
 	{
 		return (UINT)(useCount.x + useCount.y + useCount.z);
 	}
 };
 
-class RTVHeap : public Heap<int>
+//===================================================================
+//  
+//  レンダーターゲットビュー     (RTV)
+//  
+//===================================================================
+class RTVHeap : public BaseHeap<int>
 {
 public:
 	RTVHeap() {}
@@ -81,7 +86,12 @@ public:
 	int CreateRTV(ID3D12Resource* pBuffer);
 };
 
-class DSVHeap : public Heap<int>
+//===================================================================
+//  
+//  デプスステンシルビュー       (DSV)
+//  
+//===================================================================
+class DSVHeap : public BaseHeap<int>
 {
 public:
 	DSVHeap() {}
@@ -90,7 +100,12 @@ public:
 	int CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format);
 };
 
-class CSUHeap : public Heap<XMFLOAT3>
+//===================================================================
+//  定数バッファービュー         (CBV)
+//  シェーダリソースビュー       (SRV)
+//  アンオーダードアクセスビュー (UAV)
+//===================================================================
+class CSUHeap : public BaseHeap<DXVECTOR3>
 {
 	CSUHeap() {}
 	~CSUHeap() {}
@@ -104,5 +119,5 @@ class CSUHeap : public Heap<XMFLOAT3>
 
 	ID3D12DescriptorHeap* GetHeap() { return m_pHeap.Get(); }
 
-	const XMFLOAT3& GetUseCount() { return m_useCount; }
+	const DXVECTOR3& GetUseCount() { return m_useCount; }
 };

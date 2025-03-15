@@ -31,7 +31,7 @@ private:
 	bool CreateFence();
 
 	void SetResourceBarrier(
-		ID3D12Resource* pResource,
+		ID3D12Resource*       pResource,
 		D3D12_RESOURCE_STATES before,
 		D3D12_RESOURCE_STATES after
 	);
@@ -48,20 +48,20 @@ private:
 		Kind,
 	};
 
-	com_ptr<ID3D12Device8>				m_pDevice			= nullptr;
-	com_ptr<IDXGIFactory6>				m_pDxgiFactory		= nullptr;
+	com_ptr<ID3D12Device8>              m_pDevice            = nullptr;
+	com_ptr<IDXGIFactory6>              m_pDxgiFactory       = nullptr;
 
-	com_ptr<ID3D12CommandAllocator>		m_pCmdAllocator		= nullptr;
-	com_ptr<ID3D12GraphicsCommandList6>	m_pCmdList			= nullptr;
-	com_ptr<ID3D12CommandQueue>			m_pCmdQueue			= nullptr;
+	com_ptr<ID3D12CommandAllocator>     m_pCmdAllocator      = nullptr;
+	com_ptr<ID3D12GraphicsCommandList6> m_pCmdList           = nullptr;
+	com_ptr<ID3D12CommandQueue>         m_pCmdQueue          = nullptr;
 
-	com_ptr<IDXGISwapChain4>			m_pSwapChain		= nullptr;
+	com_ptr<IDXGISwapChain4>            m_pSwapChain         = nullptr;
 
-	array<com_ptr<ID3D12Resource>, 2>	m_pSwapChainBuffers;
-	unique_ptr<RTVHeap>					m_pRTVHeap			= nullptr;
+	array<com_ptr<ID3D12Resource>, 2>   m_pSwapChainBuffers;
+	unique_ptr<RTVHeap>                 m_pRTVHeap           = nullptr;
 
-	com_ptr<ID3D12Fence>				m_pFence			= nullptr;
-	UINT64								m_fenceVal			= 0;
+	com_ptr<ID3D12Fence>                m_pFence             = nullptr;
+	UINT64                              m_fenceVal           = 0;
 
 #pragma region ƒVƒ“ƒOƒ‹ƒgƒ“
 public:
