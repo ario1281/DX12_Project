@@ -1,7 +1,7 @@
 #include "define.h"
-#include "GraphicsDevice.h"
+#include "Direct3D12.h"
 
-bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
+bool Direct3D::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
 	//=======================================================
 	// ファクトリーの作成
@@ -11,10 +11,6 @@ bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscr
 		assert(0 && "D3D12デバイス作成失敗");
 		return false;
 	}
-
-#ifdef _DEBUG
-	EnableDebugLayer();
-#endif
 
 	//=======================================================
 	// デバイスの作成
@@ -46,8 +42,8 @@ bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscr
 	//=======================================================
 	// ヒープの作成
 	//=======================================================
-	m_pRTVHeap = make_unique<RTVHeap>();
-	if (!m_pRTVHeap->Create(this, HeapType::RTV, 100))
+	m_pRTVHeap = std::make_unique<RTVHeap>();
+	if (!m_pRTVHeap->Create(HeapType::RTV, 100))
 	{
 		assert(0 && "RTVヒープの作成失敗");
 		return false;
@@ -75,7 +71,7 @@ bool GraphicsDevice::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscr
 	return true;
 }
 
-void GraphicsDevice::ScreenFlip()
+void Direct3D::ScreenFlip()
 {
 	// リソースバリアのステートをレンダーターゲットに変更
 	auto bbIdx = m_pSwapChain->GetCurrentBackBufferIndex();
@@ -118,7 +114,7 @@ void GraphicsDevice::ScreenFlip()
 	m_pSwapChain->Present(1, 0);
 }
 
-void GraphicsDevice::WaitForCommandQueue()
+void Direct3D::WaitForCommandQueue()
 {
 	m_pCmdQueue->Signal(m_pFence.Get(), ++m_fenceVal);
 
@@ -138,10 +134,25 @@ void GraphicsDevice::WaitForCommandQueue()
 
 
 
-bool GraphicsDevice::CreateFactory()
+bool Direct3D::CreateFactory()
 {
-	auto hr = CreateDXGIFactory2(
-		DXGI_CREATE_FACTORY_DEBUG,
+	HRESULT hr;
+	UINT flag = 0;
+
+#if defined(_DEBUG)
+
+	flag |= DXGI_CREATE_FACTORY_DEBUG;
+
+	com_ptr<ID3D12Debug> _debug;
+	D3D12GetDebugInterface(
+		IID_PPV_ARGS(_debug.GetAddressOf())
+	);
+	_debug->EnableDebugLayer();              // デバッグレイヤーを有効にする
+
+#endif // _DEBUG
+
+
+	hr = CreateDXGIFactory2(flag,
 		IID_PPV_ARGS(m_pDxgiFactory.GetAddressOf())
 	);
 	if (FAILED(hr)) { return false; }
@@ -149,11 +160,11 @@ bool GraphicsDevice::CreateFactory()
 	return true;
 }
 
-bool GraphicsDevice::CreateDevice()
+bool Direct3D::CreateDevice()
 {
-	com_ptr<IDXGIAdapter>         pAdapter = nullptr;
-	vector<com_ptr<IDXGIAdapter>> pAdapters;
-	vector<DXGI_ADAPTER_DESC>     descs;
+	com_ptr<IDXGIAdapter>              pAdapter;
+	std::vector<com_ptr<IDXGIAdapter>> pAdapters;
+	std::vector<DXGI_ADAPTER_DESC>     descs;
 
 	D3D_FEATURE_LEVEL levels[] = {
 		D3D_FEATURE_LEVEL_12_1,
@@ -176,12 +187,12 @@ bool GraphicsDevice::CreateDevice()
 	GPUTier gpuTier = GPUTier::Kind;
 	for (int i = 0; i < descs.size(); ++i)
 	{
-		if (wstring(descs[i].Description).find(L"NVIDIA") != wstring::npos)
+		if (std::wstring(descs[i].Description).find(L"NVIDIA") != std::wstring::npos)
 		{
 			pAdapter = pAdapters[i];
 			break;
 		}
-		else if (wstring(descs[i].Description).find(L"Amd") != wstring::npos)
+		else if (std::wstring(descs[i].Description).find(L"Amd") != std::wstring::npos)
 		{
 			if (gpuTier > GPUTier::Amd)
 			{
@@ -189,7 +200,7 @@ bool GraphicsDevice::CreateDevice()
 				gpuTier  = GPUTier::Amd;
 			}
 		}
-		else if (wstring(descs[i].Description).find(L"Intel") != wstring::npos)
+		else if (std::wstring(descs[i].Description).find(L"Intel") != std::wstring::npos)
 		{
 			if (gpuTier > GPUTier::Intel)
 			{
@@ -197,7 +208,7 @@ bool GraphicsDevice::CreateDevice()
 				gpuTier  = GPUTier::Intel;
 			}
 		}
-		else if (wstring(descs[i].Description).find(L"Arm") != wstring::npos)
+		else if (std::wstring(descs[i].Description).find(L"Arm") != std::wstring::npos)
 		{
 			if (gpuTier > GPUTier::Arm)
 			{
@@ -205,7 +216,7 @@ bool GraphicsDevice::CreateDevice()
 				gpuTier  = GPUTier::Arm;
 			}
 		}
-		else if (wstring(descs[i].Description).find(L"Qualcomm") != wstring::npos)
+		else if (std::wstring(descs[i].Description).find(L"Qualcomm") != std::wstring::npos)
 		{
 			if (gpuTier > GPUTier::Qualcomm)
 			{
@@ -228,7 +239,7 @@ bool GraphicsDevice::CreateDevice()
 	return true;
 }
 
-bool GraphicsDevice::CreateCommandList()
+bool Direct3D::CreateCommandList()
 {
 	HRESULT hr;
 
@@ -258,7 +269,7 @@ bool GraphicsDevice::CreateCommandList()
 	return true;
 }
 
-bool GraphicsDevice::CreateSwapChain(HWND hwnd, int width, int height)
+bool Direct3D::CreateSwapChain(HWND hwnd, int width, int height)
 {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	desc.Width              = width;
@@ -282,7 +293,7 @@ bool GraphicsDevice::CreateSwapChain(HWND hwnd, int width, int height)
 	return true;
 }
 
-bool GraphicsDevice::CreateSwapChainRTV()
+bool Direct3D::CreateSwapChainRTV()
 {
 	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
 	{
@@ -295,7 +306,7 @@ bool GraphicsDevice::CreateSwapChainRTV()
 	return true;
 }
 
-bool GraphicsDevice::CreateFence()
+bool Direct3D::CreateFence()
 {
 	auto hr = m_pDevice->CreateFence(m_fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence));
 	if (FAILED(hr)) { return false; }
@@ -303,7 +314,7 @@ bool GraphicsDevice::CreateFence()
 	return true;
 }
 
-void GraphicsDevice::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after)
+void Direct3D::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after)
 {
 	D3D12_RESOURCE_BARRIER barrier = {};
 	barrier.Transition.pResource   = pResource;
@@ -312,11 +323,3 @@ void GraphicsDevice::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURC
 	m_pCmdList->ResourceBarrier(1, &barrier);
 }
 
-void GraphicsDevice::EnableDebugLayer()
-{
-	ID3D12Debug* pDebugLayer = nullptr;
-
-	D3D12GetDebugInterface(IID_PPV_ARGS(&pDebugLayer));
-	pDebugLayer->EnableDebugLayer();	// デバッグレイヤーを有効にする
-	pDebugLayer->Release();
-}

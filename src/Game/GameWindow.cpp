@@ -1,7 +1,7 @@
 #include "main.h"
 #include"GameWindow.h"
 
-bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const string& _wndName)
+bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const std::string &_wndName)
 {
 	/*===================================================================
 		メインウィンドウ作成

@@ -27,16 +27,10 @@
     <ClInclude Include="src\Pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\Helper.h">
-      <Filter>src\System\Library</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game\GameWindow.h">
       <Filter>src\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\GraphicsDevice.h">
-      <Filter>src\System\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\Library\Model.h">
+    <ClInclude Include="src\System\Library\Direct3D12.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\SceneBase.h">
@@ -51,6 +45,15 @@
     <ClInclude Include="src\System\Library\Math.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\GameObject.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\TextureManager.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\MeshManager.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
     <ClInclude Include="src\System\Library\SquarePolygon.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
@@ -62,16 +65,10 @@
     <ClCompile Include="src\Pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\Helper.cpp">
-      <Filter>src\System\Library</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\GameWindow.cpp">
       <Filter>src\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\GraphicsDevice.cpp">
-      <Filter>src\System\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\Library\Model.cpp">
+    <ClCompile Include="src\System\Library\Direct3D12.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\SceneBase.cpp">
@@ -81,6 +78,15 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\Math.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GameObject.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\TextureManager.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\MeshManager.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\SquarePolygon.cpp">

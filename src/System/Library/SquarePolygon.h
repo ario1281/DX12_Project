@@ -29,12 +29,17 @@ private:
 	// 1つの頂点データ
 	struct VERTEX
 	{
-		DXVECTOR3 pos;   // 座標
-		DWORD     color; // 色
-		XMFLOAT2  uv;    // UV座標
+		DXVECTOR3 pos;     // 座標
+		DWORD     color;   // 色
+		XMFLOAT2  uv;      // UV座標
 	};
 	// 頂点配列
 	VERTEX m_vertex[4];
+
+	com_ptr<ID3D12Resource>  m_pVBuffer = nullptr;
+	com_ptr<ID3D12Resource>  m_pIBuffer = nullptr;
+	D3D12_VERTEX_BUFFER_VIEW m_vbView;
+	D3D12_INDEX_BUFFER_VIEW  m_ibView;
 
 	// アニメーション関係
 	int   m_anmSplitX = 1; // 横の分割

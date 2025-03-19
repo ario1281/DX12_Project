@@ -11,19 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\GameObject.h" />
     <ClInclude Include="src\Game\GameWindow.h" />
     <ClInclude Include="src\Game\SceneBase.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\Pch.h" />
     <ClInclude Include="src\System\Library\define.h" />
-    <ClInclude Include="src\System\Library\GraphicsDevice.h" />
+    <ClInclude Include="src\System\Library\Direct3D12.h" />
     <ClInclude Include="src\System\Library\Heap.h" />
-    <ClInclude Include="src\System\Library\Helper.h" />
     <ClInclude Include="src\System\Library\Math.h" />
-    <ClInclude Include="src\System\Library\Model.h" />
+    <ClInclude Include="src\System\Library\MeshManager.h" />
     <ClInclude Include="src\System\Library\SquarePolygon.h" />
+    <ClInclude Include="src\System\Library\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\Game\GameWindow.cpp" />
     <ClCompile Include="src\Game\SceneBase.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -32,12 +34,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\System\Library\GraphicsDevice.cpp" />
+    <ClCompile Include="src\System\Library\Direct3D12.cpp" />
     <ClCompile Include="src\System\Library\Heap.cpp" />
-    <ClCompile Include="src\System\Library\Helper.cpp" />
     <ClCompile Include="src\System\Library\Math.cpp" />
-    <ClCompile Include="src\System\Library\Model.cpp" />
+    <ClCompile Include="src\System\Library\MeshManager.cpp" />
     <ClCompile Include="src\System\Library\SquarePolygon.cpp" />
+    <ClCompile Include="src\System\Library\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\Shader\BasicPixelShader.hlsl">

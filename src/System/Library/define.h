@@ -4,8 +4,8 @@
 //  Šî–{
 //  
 //===============================================
-#define	SCRW		1280	// Screen Width
-#define	SCRH		720		// Screen Height
+#define	SCRW		1280    // Screen Width
+#define	SCRH		720     // Screen Height
 
 #pragma comment(lib, "winmm.lib")
 
@@ -17,7 +17,6 @@
 
 #include <wrl/client.h>
 
-using namespace std;
 
 //===============================================
 //  
@@ -74,13 +73,29 @@ using namespace DirectX;
 
 //===============================================
 //  
+//  Helper
+//  
+//===============================================
+template<class T>
+using com_ptr    = Microsoft::WRL::ComPtr<T>;
+
+template<class T>
+using shared_ptr = std::shared_ptr<T>;
+
+template<class T>
+using unique_ptr = std::unique_ptr<T>;
+
+
+//===============================================
+//  
 //  Other
 //  
 //===============================================
-#include "Helper.h"
+
 #include "Math.h"
+#include "Direct3D12.h"
 
-#include "SquarePolygon.h"
+#include "TextureManager.h"
+#include "MeshManager.h"
 
-#include "GraphicsDevice.h"
 #include "Heap.h"

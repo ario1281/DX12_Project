@@ -1,6 +1,7 @@
 #include "define.h"
 #include "Heap.h"
 
+// RTV
 int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 {
 	if (m_useCount < m_nextRegistNumber)
@@ -15,11 +16,13 @@ int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
 	rtvDesc.Format        = DXGI_FORMAT_R8G8B8A8_UNORM;
 	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-	m_pDevice->GetDevice()->CreateRenderTargetView(pBuffer, &rtvDesc, handle);
+	DEVICE->CreateRenderTargetView(pBuffer, &rtvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
 
+
+// DSV
 int DSVHeap::CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format)
 {
 	if (m_useCount < m_nextRegistNumber)
@@ -34,11 +37,13 @@ int DSVHeap::CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format)
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Format        = format;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	m_pDevice->GetDevice()->CreateDepthStencilView(pBuffer, &dsvDesc, handle);
+	DEVICE->CreateDepthStencilView(pBuffer, &dsvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
 
+
+// CBV SRV UAV
 int CSUHeap::CreateSRV(ID3D12Resource* pBuffer)
 {
 	if (m_useCount.y < m_nextRegistNumber)
@@ -61,12 +66,13 @@ int CSUHeap::CreateSRV(ID3D12Resource* pBuffer)
 		srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
 	}
 
-	m_pDevice->GetDevice()->CreateShaderResourceView(pBuffer, &srvDesc, handle);
+	DEVICE->CreateShaderResourceView(pBuffer, &srvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
 
-const D3D12_GPU_DESCRIPTOR_HANDLE CSUHeap::GetGPUHandle(int number)
+const D3D12_GPU_DESCRIPTOR_HANDLE
+CSUHeap::GetGPUHandle(int number)
 {
 	auto handle = m_pHeap->GetGPUDescriptorHandleForHeapStart();
 	handle.ptr += (UINT64)m_incrementSize * ((UINT64)m_useCount.x + 1);
@@ -78,5 +84,5 @@ const D3D12_GPU_DESCRIPTOR_HANDLE CSUHeap::GetGPUHandle(int number)
 void CSUHeap::SetHeap()
 {
 	ID3D12DescriptorHeap* ppHeaps[] = { m_pHeap.Get() };
-	m_pDevice->GetCmdList()->SetDescriptorHeaps(1, ppHeaps);
+	COMMAND->SetDescriptorHeaps(1, ppHeaps);
 }

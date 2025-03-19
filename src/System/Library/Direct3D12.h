@@ -4,7 +4,7 @@ class RTVHeap;
 class DSVHeap;
 class CSUHeap;
 
-class GraphicsDevice
+class Direct3D
 {
 public:
 	bool Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen);
@@ -43,8 +43,6 @@ private:
 		D3D12_RESOURCE_STATES after
 	);
 
-	void EnableDebugLayer();
-
 	enum class GPUTier
 	{
 		NVIDIA,
@@ -64,7 +62,7 @@ private:
 
 	com_ptr<IDXGISwapChain4>            m_pSwapChain         = nullptr;
 
-	array<com_ptr<ID3D12Resource>, 2>   m_pSwapChainBuffers;
+	std::array<com_ptr<ID3D12Resource>, 2>   m_pSwapChainBuffers;
 	unique_ptr<RTVHeap>                 m_pRTVHeap           = nullptr;
 
 	com_ptr<ID3D12Fence>                m_pFence             = nullptr;
@@ -76,16 +74,18 @@ private:
 
 #pragma region ƒVƒ“ƒOƒ‹ƒgƒ“
 public:
-	static GraphicsDevice& GetInstance() {
-		static GraphicsDevice instance;
+	static Direct3D& GetInstance() {
+		static Direct3D instance;
 		return instance;
 	}
 
 private:
-	GraphicsDevice() {}
+	Direct3D() {}
 
 #pragma endregion
 
 };
 
-#define DX12 GraphicsDevice::GetInstance()
+#define D3D      Direct3D::GetInstance()
+#define DEVICE   (&D3D)->GetDevice()
+#define COMMAND  (&D3D)->GetCmdList()

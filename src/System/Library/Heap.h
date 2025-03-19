@@ -15,7 +15,7 @@ public:
 	BaseHeap() {}
 	~BaseHeap() {}
 
-	bool Create(GraphicsDevice* pDevice, HeapType heapType, TempHeap useCount)
+	bool Create(HeapType heapType, TempHeap useCount)
 	{
 		auto type = static_cast<D3D12_DESCRIPTOR_HEAP_TYPE>(heapType);
 
@@ -26,12 +26,11 @@ public:
 		heapDesc.Flags          = heapType == HeapType::CSU ?
 			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-		auto hr = pDevice->GetDevice()->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
+		auto hr = DEVICE->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
 		if (FAILED(hr)) { return false; }
 
 		m_useCount      = useCount;
-		m_incrementSize = pDevice->GetDevice()->GetDescriptorHandleIncrementSize(type);
-		m_pDevice       = pDevice;
+		m_incrementSize = DEVICE->GetDescriptorHandleIncrementSize(type);
 
 		return true;
 	}
@@ -53,7 +52,6 @@ public:
 	}
 
 protected:
-	GraphicsDevice*               m_pDevice = nullptr;
 	com_ptr<ID3D12DescriptorHeap> m_pHeap   = nullptr;
 
 	TempHeap m_useCount;
