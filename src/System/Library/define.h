@@ -10,6 +10,7 @@
 #pragma comment(lib, "winmm.lib")
 
 #include <windows.h>
+#include <tchar.h>
 #include <stdio.h>
 #include <math.h>
 #include <commctrl.h>
@@ -73,26 +74,13 @@ using namespace DirectX;
 
 //===============================================
 //  
-//  Helper
-//  
-//===============================================
-template<class T>
-using com_ptr    = Microsoft::WRL::ComPtr<T>;
-
-template<class T>
-using shared_ptr = std::shared_ptr<T>;
-
-template<class T>
-using unique_ptr = std::unique_ptr<T>;
-
-
-//===============================================
-//  
 //  Other
 //  
 //===============================================
 
+#include "Helper.h"
 #include "Math.h"
+
 #include "Direct3D12.h"
 
 #include "TextureManager.h"

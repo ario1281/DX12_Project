@@ -29,7 +29,7 @@ bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const st
 
 	m_hWnd = CreateWindow(
 		wc.lpszClassName,
-		"3Dゲームプログラミング",
+		_T("3Dゲームプログラミング"),
 		WS_OVERLAPPEDWINDOW - WS_THICKFRAME,
 		CW_USEDEFAULT, CW_USEDEFAULT, _w, _h,
 		nullptr,

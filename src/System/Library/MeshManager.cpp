@@ -9,5 +9,4 @@ bool MeshManager::Load(const std::string& filename)
 void MeshManager::Draw()
 {
 	// •`‰æƒRƒ}ƒ“ƒh
-	COMMAND->IASetVertexBuffers(0, 1, &);
 }

@@ -57,6 +57,9 @@
     <ClInclude Include="src\System\Library\SquarePolygon.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Library\Helper.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -90,6 +93,9 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\SquarePolygon.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Helper.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,6 +19,7 @@
     <ClInclude Include="src\System\Library\define.h" />
     <ClInclude Include="src\System\Library\Direct3D12.h" />
     <ClInclude Include="src\System\Library\Heap.h" />
+    <ClInclude Include="src\System\Library\Helper.h" />
     <ClInclude Include="src\System\Library\Math.h" />
     <ClInclude Include="src\System\Library\MeshManager.h" />
     <ClInclude Include="src\System\Library\SquarePolygon.h" />
@@ -36,6 +37,7 @@
     </ClCompile>
     <ClCompile Include="src\System\Library\Direct3D12.cpp" />
     <ClCompile Include="src\System\Library\Heap.cpp" />
+    <ClCompile Include="src\System\Library\Helper.cpp" />
     <ClCompile Include="src\System\Library\Math.cpp" />
     <ClCompile Include="src\System\Library\MeshManager.cpp" />
     <ClCompile Include="src\System\Library\SquarePolygon.cpp" />

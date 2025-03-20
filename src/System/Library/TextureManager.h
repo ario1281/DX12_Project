@@ -10,9 +10,20 @@ public:
 	/// <returns>
 	/// ¬Œ÷:true@¸”s:false
 	/// </returns>
-	bool Load(const std::string &filename);
-	
+	bool Load(const std::wstring& filename);
+
+
+#pragma region æ“¾Œn
+
+	const Image& GetImage() const { return m_img; }
+
+	const D3D12_RECT& GetRect() const { return m_rect; }
+
+#pragma endregion
 
 private:
+	com_ptr<ID3D12Resource> m_texBuffer; // 
 
+	Image          m_img;
+	D3D12_RECT     m_rect;
 };
