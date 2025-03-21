@@ -42,12 +42,13 @@ bool Direct3D::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	//=======================================================
 	// ヒープの作成
 	//=======================================================
-	m_pRTVHeap = std::make_unique<RTVHeap>();
-	if (!m_pRTVHeap->Create(HeapType::RTV, 100))
+	if (!CreateDescriptorHeap())
 	{
-		assert(0 && "RTVヒープの作成失敗");
+		assert(0 && "ヒープの作成失敗");
 		return false;
 	}
+
+
 
 	//=======================================================
 	// スワップチェインRTVの作成
@@ -71,7 +72,7 @@ bool Direct3D::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	return true;
 }
 
-void Direct3D::ScreenFlip()
+void Direct3D::Prepare()
 {
 	// リソースバリアのステートをレンダーターゲットに変更
 	auto bbIdx = m_pSwapChain->GetCurrentBackBufferIndex();
@@ -83,13 +84,21 @@ void Direct3D::ScreenFlip()
 
 	// レンダーターゲットをセット
 	auto rtvH = m_pRTVHeap->GetCPUHandle(bbIdx);
+	auto dstH = m_upDSVHeap->GetCPUHandle(m_upDepthStencil->GetDSVNumber());
 	m_pCmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
 	// セットしたレンダーターゲットの画面をクリア
-	float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };//黄色
+	float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f }; // 青色
 	m_pCmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
 
+	// デプスバッファのクリア
+	m_upDepthStencil->ClearBuffer();
+}
+
+void Direct3D::ScreenFlip()
+{
 	// リソースバリアのステートをプレゼントに戻す
+	auto bbIdx = m_pSwapChain->GetCurrentBackBufferIndex();
 	SetResourceBarrier(
 		m_pSwapChainBuffers[bbIdx].Get(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET,
@@ -289,6 +298,36 @@ bool Direct3D::CreateSwapChain(HWND hwnd, int width, int height)
 		(IDXGISwapChain1**)m_pSwapChain.GetAddressOf()
 	);
 	if (FAILED(hr)) { return false; }
+
+	return true;
+}
+
+bool Direct3D::CreateDescriptorHeap()
+{
+	m_pRTVHeap  = std::make_unique<RTVHeap>();
+	m_upCSUHeap = std::make_unique<CSUHeap>();
+	m_upDSVHeap = std::make_unique<DSVHeap>();
+
+	//=======================================================
+	// ヒープの作成
+	//=======================================================
+	if (!m_pRTVHeap->Create(HeapType::RTV, 100))
+	{
+		assert(0 && "RTVヒープの作成失敗");
+		return false;
+	}
+
+	if (!m_upCSUHeap->Create(HeapType::CSU, DXVECTOR3(100, 100, 100)))
+	{
+		assert(0 && "CBV, SRV, UAVヒープの作成失敗");
+		return false;
+	}
+
+	if (!m_upDSVHeap->Create(HeapType::DSV, 100))
+	{
+		assert(0 && "DSVヒープの作成失敗");
+		return false;
+	}
 
 	return true;
 }

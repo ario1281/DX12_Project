@@ -4,10 +4,15 @@ class RTVHeap;
 class DSVHeap;
 class CSUHeap;
 
+class CBufferAllocater;
+class DepthStencil;
+
 class Direct3D
 {
 public:
 	bool Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen);
+	
+	void Prepare();
 
 	void ScreenFlip();
 
@@ -33,6 +38,10 @@ private:
 	bool CreateCommandList();
 
 	bool CreateSwapChain(HWND hwnd, int width, int height);
+
+	bool CreateDescriptorHeap();
+
+
 	bool CreateSwapChainRTV();
 
 	bool CreateFence();
@@ -71,6 +80,8 @@ private:
 	unique_ptr<RTVHeap>                 m_upRTVHeap          = nullptr;
 	unique_ptr<CSUHeap>                 m_upCSUHeap          = nullptr;
 	unique_ptr<DSVHeap>                 m_upDSVHeap          = nullptr;
+	unique_ptr<CBufferAllocater>        m_upBufferAllocater  = nullptr;
+	unique_ptr<DepthStencil>            m_upDepthStencil     = nullptr;
 
 #pragma region ƒVƒ“ƒOƒ‹ƒgƒ“
 public:

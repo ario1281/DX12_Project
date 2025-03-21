@@ -63,10 +63,13 @@
 #include <d3dcompiler.h>
 #include <DirectXTex.h>
 
+#include <SimpleMath.h>
+
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
+#pragma comment(lib, "DirectXTK12.lib")
 #pragma comment(lib,"DirectXTex.lib")
 
 using namespace DirectX;
@@ -79,11 +82,12 @@ using namespace DirectX;
 //===============================================
 
 #include "Helper.h"
-#include "Math.h"
 
 #include "Direct3D12.h"
+
+#include "Heap.h"
+#include "Buffer.h"
 
 #include "TextureManager.h"
 #include "MeshManager.h"
 
-#include "Heap.h"

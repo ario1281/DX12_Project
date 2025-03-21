@@ -1,5 +1,9 @@
 #pragma once
 
+using DXVECTOR2 = SimpleMath::Vector2;
+using DXVECTOR3 = SimpleMath::Vector3;
+using DXMATRIX  = SimpleMath::Matrix;
+
 template<class T>
 using com_ptr = Microsoft::WRL::ComPtr<T>;
 
