@@ -127,4 +127,5 @@ void System::Loop()
 
 void System::Release()
 {
+	m_Window.Release();
 }

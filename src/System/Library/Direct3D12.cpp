@@ -39,6 +39,9 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 		return false;
 	}
 
+	// フルスクリーン
+	SetFullScreen(fullscreen);
+
 	//=======================================================
 	// ヒープの作成
 	//=======================================================
@@ -179,7 +182,7 @@ bool Direct3D12::CreateDevice()
 		D3D_FEATURE_LEVEL_11_0,
 	};
 
-	for (UINT i = 0; 1; ++i)
+	for (UINT i = 0; true; ++i)
 	{
 		pAdapters.push_back(nullptr);
 		auto hr = m_pDxgiFactory->EnumAdapters(i, &pAdapters[i]);
@@ -288,13 +291,18 @@ bool Direct3D12::CreateSwapChain(HWND hwnd, int width, int height)
 	desc.SwapEffect         = DXGI_SWAP_EFFECT_FLIP_DISCARD;          // フリップ後は速やかに破棄
 	desc.Flags              = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // ウィンドウとフルスクリーン切り替え可能
 
+
+	// スワップチェインの作成
+	IDXGISwapChain1* pSwapChain;
 	auto hr = m_pDxgiFactory->CreateSwapChainForHwnd(
 		m_pCmdQueue.Get(),
 		hwnd, &desc,
 		nullptr, nullptr,
-		(IDXGISwapChain1**)m_pSwapChain.GetAddressOf()
+		&pSwapChain
 	);
 	if (FAILED(hr)) { return false; }
+
+	pSwapChain->QueryInterface(IID_PPV_ARGS(&m_pSwapChain));
 
 	return true;
 }

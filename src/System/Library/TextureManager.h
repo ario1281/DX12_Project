@@ -1,7 +1,5 @@
 #pragma once
 
-class Buffer;
-
 class TextureManager : Buffer
 {
 public:
@@ -12,7 +10,7 @@ public:
 
 #pragma region Žæ“¾Œn
 
-	Image* GetImage() const { return m_pImage.Get(); }
+	Image GetImage() const { return m_image; }
 
 	CD3DX12_RECT GetRect() const { return m_rect; }
 
@@ -21,8 +19,8 @@ public:
 #pragma endregion
 
 private:
-	com_ptr<Image> m_pImage = nullptr;
-	CD3DX12_RECT   m_rect;
+	Image        m_image;
+	CD3DX12_RECT m_rect;
 
 	int m_srvNumber = 0;
 };

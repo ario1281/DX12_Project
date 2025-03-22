@@ -50,6 +50,14 @@ public:
 		return m_upBufferAllocater.get();
 	}
 
+	void SetFullScreen(bool fullscreen)
+	{
+		if (m_pSwapChain != nullptr) {
+			// フルスクリーンに切り替え
+			m_pSwapChain->SetFullscreenState(fullscreen, nullptr);
+		}
+	}
+
 #pragma endregion
 
 private:
@@ -57,12 +65,8 @@ private:
 	bool CreateDevice();
 
 	bool CreateCommandList();
-
 	bool CreateSwapChain(HWND hwnd, int width, int height);
-
 	bool CreateDescriptorHeap();
-
-
 	bool CreateSwapChainRTV();
 
 	bool CreateFence();
@@ -84,10 +88,10 @@ private:
 	};
 
 	com_ptr<ID3D12Device8>                 m_pDevice       = nullptr;
-	com_ptr<IDXGIFactory6>                 m_pDxgiFactory  = nullptr;
+	com_ptr<IDXGIFactory7>                 m_pDxgiFactory  = nullptr;
 
 	com_ptr<ID3D12CommandAllocator>        m_pCmdAllocator = nullptr;
-	com_ptr<ID3D12GraphicsCommandList6>    m_pCmdList      = nullptr;
+	com_ptr<ID3D12GraphicsCommandList7>    m_pCmdList      = nullptr;
 	com_ptr<ID3D12CommandQueue>            m_pCmdQueue     = nullptr;
 
 	com_ptr<IDXGISwapChain4>               m_pSwapChain    = nullptr;

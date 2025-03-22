@@ -4,21 +4,23 @@ bool TextureManager::Load(const std::string &filename)
 {
 	HRESULT hr; 
 
-	std::wstring _path = stow(filename);
-
-	// WICテクスチャロード
+	std::wstring _path;
 	TexMetadata  _metaData;
 	ScratchImage _scratchImg;
+
+	stow_s(filename, _path);
+
+	// WICテクスチャロード
 	hr = LoadFromWICFile(_path.c_str(), WIC_FLAGS_NONE, &_metaData, _scratchImg);
 	if (FAILED(hr)) { return false; }
 
-	m_pImage = _scratchImg.GetImage(0, 0, 0);
+	m_image = *_scratchImg.GetImage(0, 0, 0);
 
 	// 矩形の長さセット
-	SetRect(&m_rect, 0, 0, m_pImage->width, m_pImage->height);
+	SetRect(&m_rect, 0, 0, (int)m_image.width, (int)m_image.height);
 
 	// Texture用のHeapPropを作成
-	D3D12_HEAP_PROPERTIES texProp{};
+	D3D12_HEAP_PROPERTIES texProp = {};
 	texProp.Type                 = D3D12_HEAP_TYPE_CUSTOM;
 	texProp.CPUPageProperty      = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
 	texProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
@@ -26,7 +28,7 @@ bool TextureManager::Load(const std::string &filename)
 	texProp.VisibleNodeMask      = 0;
 
 	// Texture用のResourceDescを作成
-	D3D12_RESOURCE_DESC resDesc{};
+	D3D12_RESOURCE_DESC resDesc = {};
 	resDesc.Format             = _metaData.format;
 	resDesc.Width              = static_cast<UINT>(_metaData.width);
 	resDesc.Height             = static_cast<UINT>(_metaData.height);
@@ -51,9 +53,9 @@ bool TextureManager::Load(const std::string &filename)
 
 	hr = m_pBuffer->WriteToSubresource(
 		0, nullptr,
-		m_pImage->pixels,
-		static_cast<UINT>(m_pImage->rowPitch),
-		static_cast<UINT>(m_pImage->slicePitch) //全サイズ
+		m_image.pixels,
+		static_cast<UINT>(m_image.rowPitch),
+		static_cast<UINT>(m_image.slicePitch) //全サイズ
 	);
 	if (FAILED(hr)) {
 		assert(0 && "バッファにテクスチャデータの書き込み失敗");

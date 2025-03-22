@@ -158,6 +158,8 @@ LRESULT GameWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		m_AnyKeyFlg = true;
 		switch (wParam)
 		{
+		case VK_ESCAPE:
+			Release();
 		default:
 			return DefWindowProc(hWnd, msg, wParam, lParam);
 		}
