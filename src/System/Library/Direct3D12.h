@@ -76,6 +76,7 @@ private:
 		D3D12_RESOURCE_STATES after
 	);
 
+
 	enum class GPUTier
 	{
 		NVIDIA,

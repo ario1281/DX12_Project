@@ -1,13 +1,6 @@
 #pragma once
 
-template<class T>
-using com_ptr    = Microsoft::WRL::ComPtr<T>;
-
-template<class T>
-using shared_ptr = std::shared_ptr<T>;
-
-template<class T>
-using unique_ptr = std::unique_ptr<T>;
+#define SafeClear(p) (p).clear();
 
 /// <summary>
 /// string(マルチバイト文字列)からwstring(ワイド文字列)を得る
@@ -52,3 +45,14 @@ inline HRESULT stow_s(_In_ const std::string& str, _Out_ std::wstring& wstr) {
 
 	return S_OK;
 }
+
+
+template<class T>
+using com_ptr = Microsoft::WRL::ComPtr<T>;
+
+template<class T>
+using shared_ptr = std::shared_ptr<T>;
+template<class T>
+using unique_ptr = std::unique_ptr<T>;
+template<class T>
+using weak_ptr = std::weak_ptr<T>;

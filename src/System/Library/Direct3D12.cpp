@@ -96,7 +96,7 @@ void Direct3D12::Prepare()
 	);
 
 	// レンダーターゲットをセット
-	auto rtvH = m_pRTVHeap->GetCPUHandle(bbIdx);
+	auto rtvH = m_upRTVHeap->GetCPUHandle(bbIdx);
 	auto dstH = m_upDSVHeap->GetCPUHandle(m_upDepthStencil->GetDSVNumber());
 	m_pCmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
@@ -318,7 +318,7 @@ bool Direct3D12::CreateSwapChain(HWND hwnd, int width, int height)
 
 bool Direct3D12::CreateDescriptorHeap()
 {
-	m_pRTVHeap  = std::make_unique<RTVHeap>();
+	m_upRTVHeap = std::make_unique<RTVHeap>();
 	m_upCSUHeap = std::make_unique<CSUHeap>();
 	m_upDSVHeap = std::make_unique<DSVHeap>();
 
@@ -326,7 +326,7 @@ bool Direct3D12::CreateDescriptorHeap()
 	// ヒープの作成
 	//=======================================================
 	// RTVヒープ
-	if (!m_pRTVHeap->Create(HeapType::RTV, 100)) { return false; }
+	if (!m_upRTVHeap->Create(HeapType::RTV, 100)) { return false; }
 
 	// CBV, SRV, UAVヒープ
 	if (!m_upCSUHeap->Create(HeapType::CSU, Vector3(100, 100, 100))) { return false; }
@@ -344,7 +344,7 @@ bool Direct3D12::CreateSwapChainRTV()
 		auto hr = m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffers[i]));
 		if (FAILED(hr)) { return false; }
 
-		m_pRTVHeap->CreateRTV(m_pSwapChainBuffers[i].Get());
+		m_upRTVHeap->CreateRTV(m_pSwapChainBuffers[i].Get());
 	}
 
 	return true;
