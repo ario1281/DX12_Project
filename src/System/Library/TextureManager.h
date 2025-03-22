@@ -1,29 +1,28 @@
 #pragma once
 
-class TextureManager
+class Buffer;
+
+class TextureManager : Buffer
 {
 public:
-	/// <summary>
-	/// テクスチャー読み込み
-	/// </summary>
-	/// <param name="filename">ファイル名</param>
-	/// <returns>
-	/// 成功:true　失敗:false
-	/// </returns>
-	bool Load(const std::wstring& filename);
 
+	bool Load(const std::string& filename);
+
+	void Set(int index);
 
 #pragma region 取得系
 
-	const Image& GetImage() const { return m_img; }
+	Image* GetImage() const { return m_pImage.Get(); }
 
-	const D3D12_RECT& GetRect() const { return m_rect; }
+	CD3DX12_RECT GetRect() const { return m_rect; }
+
+	int GetSRVNumber() const { return m_srvNumber; }
 
 #pragma endregion
 
 private:
-	com_ptr<ID3D12Resource> m_texBuffer; // 
+	com_ptr<Image> m_pImage = nullptr;
+	CD3DX12_RECT   m_rect;
 
-	Image          m_img;
-	D3D12_RECT     m_rect;
+	int m_srvNumber = 0;
 };

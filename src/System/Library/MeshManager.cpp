@@ -18,9 +18,10 @@ void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vec
 	heapProp.CPUPageProperty      = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
 	heapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
 
+	D3D12_RESOURCE_DESC resDesc = {};
+
 #pragma region バーテックスバッファ作成
 
-	D3D12_RESOURCE_DESC resDesc = {};
 	resDesc.Dimension        = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width            = sizeof(MeshVertex) * verteces.size();
 	resDesc.Height           = 1;
@@ -57,7 +58,6 @@ void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vec
 
 #pragma region インデクスバッファ作成
 
-	D3D12_RESOURCE_DESC resDesc = {};
 	resDesc.Dimension        = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width            = sizeof(MeshFace) * faces.size();
 	resDesc.Height           = 1;

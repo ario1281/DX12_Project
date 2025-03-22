@@ -37,12 +37,9 @@ void SquarePolygon::Init(float w, float h, DWORD color)
 	desc.Layout           = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	DEV->CreateCommittedResource(
-		&prop,
-		D3D12_HEAP_FLAG_NONE,
-		&desc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&m_pVBuffer)
+		&prop, D3D12_HEAP_FLAG_NONE,
+		&desc, D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr, IID_PPV_ARGS(&m_pVBuffer)
 	);
 
 	VERTEX* vbMap = nullptr;

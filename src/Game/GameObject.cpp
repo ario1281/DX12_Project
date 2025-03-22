@@ -8,8 +8,6 @@ void GameObject::Draw2D()
 void GameObject::Draw3D()
 {
 	if (!m_spModel) { return; }
-
-	m_spModel->Draw();
 }
 
 void GameObject::SetModel(const std::string& name)

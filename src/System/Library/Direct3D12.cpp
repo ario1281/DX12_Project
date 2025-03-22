@@ -48,7 +48,8 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 		return false;
 	}
 
-
+	m_upBufferAllocater = std::make_unique<CBufferAllocator>();
+	m_upBufferAllocater->Create(m_upCSUHeap.get());
 
 	//=======================================================
 	// スワップチェインRTVの作成
@@ -153,17 +154,13 @@ bool Direct3D12::CreateFactory()
 	flag |= DXGI_CREATE_FACTORY_DEBUG;
 
 	com_ptr<ID3D12Debug> _debug;
-	D3D12GetDebugInterface(
-		IID_PPV_ARGS(_debug.GetAddressOf())
-	);
+	D3D12GetDebugInterface(IID_PPV_ARGS(&_debug));
 	_debug->EnableDebugLayer();              // デバッグレイヤーを有効にする
 
 #endif // _DEBUG
 
 
-	hr = CreateDXGIFactory2(flag,
-		IID_PPV_ARGS(m_pDxgiFactory.GetAddressOf())
-	);
+	hr = CreateDXGIFactory2(flag, IID_PPV_ARGS(&m_pDxgiFactory));
 	if (FAILED(hr)) { return false; }
 
 	return true;

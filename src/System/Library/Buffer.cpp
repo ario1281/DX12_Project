@@ -88,8 +88,7 @@ void CBufferAllocator::Create(CSUHeap* pHeap)
 	hr = DEV->CreateCommittedResource(
 		&heapProp, D3D12_HEAP_FLAG_NONE,
 		&resDesc, D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&m_pBuffer)
+		nullptr, IID_PPV_ARGS(&m_pBuffer)
 	);
 
 	if (FAILED(hr)) {

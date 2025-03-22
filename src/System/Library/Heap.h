@@ -26,7 +26,9 @@ public:
 		heapDesc.Flags          = heapType == HeapType::CSU ?
 			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-		auto hr = DEV->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
+		auto hr = DEV->CreateDescriptorHeap(
+			&heapDesc, IID_PPV_ARGS(&m_pHeap)
+		);
 		if (FAILED(hr)) { return false; }
 
 		m_useCount      = useCount;
