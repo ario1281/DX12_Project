@@ -40,15 +40,14 @@ public:
 	ID3D12Device8*
 	GetDevice() const { return m_pDevice.Get(); }
 
-	ID3D12GraphicsCommandList6*
-	GetCmdList() const { return m_pCmdList.Get(); }
+	ID3D12GraphicsCommandList7*
+	GetCommandList() const { return m_pCmdList.Get(); }
 
 	CSUHeap* GetCSUHeap() const { return m_upCSUHeap.get(); }
 	DSVHeap* GetDSVHeap() const { return m_upDSVHeap.get(); }
 
-	CBufferAllocator* GetCBufferAllocator() const {
-		return m_upBufferAllocater.get();
-	}
+	CBufferAllocator*
+	GetCBufferAllocator() const { return m_upBufferAllocater.get(); }
 
 	void SetFullScreen(bool fullscreen)
 	{
@@ -97,7 +96,6 @@ private:
 	com_ptr<IDXGISwapChain4>               m_pSwapChain    = nullptr;
 
 	std::array<com_ptr<ID3D12Resource>, 2> m_pSwapChainBuffers;
-	unique_ptr<RTVHeap>                    m_pRTVHeap      = nullptr;
 
 	com_ptr<ID3D12Fence>                   m_pFence        = nullptr;
 	UINT64                                 m_fenceVal      = 0;
@@ -124,4 +122,4 @@ private:
 
 #define D3D  Direct3D12::GetInstance()
 #define DEV  (&D3D)->GetDevice()
-#define CMD  (&D3D)->GetCmdList()
+#define CMD  (&D3D)->GetCommandList()

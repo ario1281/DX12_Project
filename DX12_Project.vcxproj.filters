@@ -60,6 +60,9 @@
     <ClInclude Include="src\System\Library\Buffer.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Library\SceneManager.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -96,6 +99,9 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\Buffer.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\SceneManager.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

@@ -71,6 +71,11 @@ void System::Loop()
 	DWORD baseTime = timeGetTime();
 	int count = 0;
 
+	srand(baseTime);
+
+	m_Scene = new SceneBase();
+	SCENE.ChangeScene(m_Scene);
+
 	while (1)
 	{
 		// ゲーム終了指定があるとき
@@ -89,16 +94,18 @@ void System::Loop()
 		//=========================================
 		// ゲーム処理の関係
 		//=========================================
-
 		// 処理開始時間
 		DWORD st = timeGetTime();
 
-
 		//=========================================
-		// シーン処理
+		// ゲーム処理の関係
 		//=========================================
+		SCENE.NowScene();
 
-		D3D.ScreenFlip();
+		if (m_sceneFlg) {
+			SCENE.ChangeScene(m_Scene);
+			m_sceneFlg = false;
+		}
 
 		//=========================================
 		// fps制御

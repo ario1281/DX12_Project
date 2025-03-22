@@ -55,13 +55,22 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	m_upBufferAllocater->Create(m_upCSUHeap.get());
 
 	//=======================================================
+	// 深度テクスチャの作成
+	//=======================================================
+	m_upDepthStencil = std::make_unique<DepthStencil>();
+	if (!m_upDepthStencil->Create(Vector2((float)w, (float)h)))
+	{
+		assert(0 && "DepthStencilの作成失敗");
+		return false;
+	}
+
+	//=======================================================
 	// スワップチェインRTVの作成
 	//=======================================================
 	if (!CreateSwapChainRTV())
 	{
 		assert(0 && "スワップチェインRTVの作成失敗");
 		return false;
-
 	}
 
 	//=======================================================
@@ -316,23 +325,14 @@ bool Direct3D12::CreateDescriptorHeap()
 	//=======================================================
 	// ヒープの作成
 	//=======================================================
-	if (!m_pRTVHeap->Create(HeapType::RTV, 100))
-	{
-		assert(0 && "RTVヒープの作成失敗");
-		return false;
-	}
+	// RTVヒープ
+	if (!m_pRTVHeap->Create(HeapType::RTV, 100)) { return false; }
 
-	if (!m_upCSUHeap->Create(HeapType::CSU, Vector3(100, 100, 100)))
-	{
-		assert(0 && "CBV, SRV, UAVヒープの作成失敗");
-		return false;
-	}
+	// CBV, SRV, UAVヒープ
+	if (!m_upCSUHeap->Create(HeapType::CSU, Vector3(100, 100, 100))) { return false; }
 
-	if (!m_upDSVHeap->Create(HeapType::DSV, 100))
-	{
-		assert(0 && "DSVヒープの作成失敗");
-		return false;
-	}
+	// DSVヒープ
+	if (!m_upDSVHeap->Create(HeapType::DSV, 100)) { return false; }
 
 	return true;
 }

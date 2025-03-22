@@ -22,6 +22,7 @@
     <ClInclude Include="src\System\Library\Heap.h" />
     <ClInclude Include="src\System\Library\Helper.h" />
     <ClInclude Include="src\System\Library\MeshManager.h" />
+    <ClInclude Include="src\System\Library\SceneManager.h" />
     <ClInclude Include="src\System\Library\SquarePolygon.h" />
     <ClInclude Include="src\System\Library\TextureManager.h" />
   </ItemGroup>
@@ -40,6 +41,7 @@
     <ClCompile Include="src\System\Library\Heap.cpp" />
     <ClCompile Include="src\System\Library\Helper.cpp" />
     <ClCompile Include="src\System\Library\MeshManager.cpp" />
+    <ClCompile Include="src\System\Library\SceneManager.cpp" />
     <ClCompile Include="src\System\Library\SquarePolygon.cpp" />
     <ClCompile Include="src\System\Library\TextureManager.cpp" />
   </ItemGroup>

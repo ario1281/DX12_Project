@@ -85,9 +85,10 @@ using namespace SimpleMath;
 #include "Helper.h"
 
 #include "Direct3D12.h"
-
 #include "Heap.h"
 #include "Buffer.h"
+
+#include "SceneManager.h"
 
 #include "TextureManager.h"
 #include "MeshManager.h"
