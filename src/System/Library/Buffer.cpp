@@ -1,6 +1,6 @@
 #include "Buffer.h"
 
-bool DepthStencil::Create(const DXVECTOR2 _resolute, DepthStencilFormat _format)
+bool DepthStencil::Create(const Vector2 _resolute, DepthStencilFormat _format)
 {
 	HRESULT hr;
 	// デプスバッファ設定
@@ -36,7 +36,7 @@ bool DepthStencil::Create(const DXVECTOR2 _resolute, DepthStencilFormat _format)
 	}
 
 	// 設定を元にデプスバッファを生成
-	hr = DEVICE->CreateCommittedResource(
+	hr = DEV->CreateCommittedResource(
 		&heapProp, D3D12_HEAP_FLAG_NONE,
 		&resDesc, D3D12_RESOURCE_STATE_DEPTH_WRITE,
 		&depthValue, IID_PPV_ARGS(&m_pBuffer)
@@ -58,7 +58,7 @@ bool DepthStencil::Create(const DXVECTOR2 _resolute, DepthStencilFormat _format)
 
 void DepthStencil::ClearBuffer()
 {
-	COMMAND->ClearDepthStencilView(
+	CMD->ClearDepthStencilView(
 		D3D.GetDSVHeap()->GetCPUHandle(m_dsvNumber),
 		D3D12_CLEAR_FLAG_DEPTH,
 		1.0f, 0, 0,
@@ -85,7 +85,7 @@ void CBufferAllocator::Create(CSUHeap* pHeap)
 	resDesc.Layout           = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 	resDesc.Width            = (UINT64)((1 + 0xff) & ~0xff) * (int)m_pHeap->GetUseCount().x;
 
-	hr = DEVICE->CreateCommittedResource(
+	hr = DEV->CreateCommittedResource(
 		&heapProp, D3D12_HEAP_FLAG_NONE,
 		&resDesc, D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
@@ -135,17 +135,17 @@ inline void CBufferAllocator::BindAndAttachData(int dscIdx, const T& data)
 
 	//
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_pHeap->GetHeap()->GetCPUDescriptorHandleForHeapStart();
-	cpuHandle.ptr += (UINT64)DEVICE->GetDescriptorHandleIncrementSize
+	cpuHandle.ptr += (UINT64)DEV->GetDescriptorHandleIncrementSize
 	(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) *m_curUseNumber;
 
-	DEVICE->CreateConstantBufferView(&cbDesc, cpuHandle);
+	DEV->CreateConstantBufferView(&cbDesc, cpuHandle);
 
 	//
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle = m_pHeap->GetHeap()->GetGPUDescriptorHandleForHeapStart();
-	gpuHandle.ptr += (UINT64)DEVICE->GetDescriptorHandleIncrementSize
+	gpuHandle.ptr += (UINT64)DEV->GetDescriptorHandleIncrementSize
 	(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) *m_curUseNumber;
 
-	COMMAND->SetGraphicsRootDescriptorTable(dscIdx, gpuHandle);
+	CMD->SetGraphicsRootDescriptorTable(dscIdx, gpuHandle);
 
 	m_curUseNumber += useValue;
 }

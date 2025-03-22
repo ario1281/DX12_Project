@@ -30,7 +30,7 @@ public:
 	/// <param name="_resolute">解像度</param>
 	/// <param name="_format">深度テクスチャのフォーマット</param>
 	bool Create(
-		const DXVECTOR2 _resolute,
+		const Vector2 _resolute,
 		DepthStencilFormat _format = DepthStencilFormat::DepthHighQuality
 	);
 
@@ -79,8 +79,8 @@ public:
 	void BindAndAttachData(int idx, const T& data);
 
 private:
-	CSUHeap* m_pHeap        = nullptr;
-	int      m_curUseNumber = 0;
+	CSUHeap*                   m_pHeap      = nullptr;
+	struct { char buf[256]; }* m_pMapBuffer = nullptr;
 
-	struct { char buf[256]; }*m_pMapBuffer = nullptr;
+	int      m_curUseNumber = 0;
 };

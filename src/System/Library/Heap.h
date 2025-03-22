@@ -26,11 +26,11 @@ public:
 		heapDesc.Flags          = heapType == HeapType::CSU ?
 			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-		auto hr = DEVICE->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
+		auto hr = DEV->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_pHeap));
 		if (FAILED(hr)) { return false; }
 
 		m_useCount      = useCount;
-		m_incrementSize = DEVICE->GetDescriptorHandleIncrementSize(type);
+		m_incrementSize = DEV->GetDescriptorHandleIncrementSize(type);
 
 		return true;
 	}
@@ -64,7 +64,7 @@ private:
 		return useCount;
 	}
 
-	UINT ComputeUseCount(DXVECTOR3 useCount)
+	UINT ComputeUseCount(Vector3 useCount)
 	{
 		return (UINT)(useCount.x + useCount.y + useCount.z);
 	}
@@ -103,7 +103,7 @@ public:
 //  シェーダリソースビュー       (SRV)
 //  アンオーダードアクセスビュー (UAV)
 //===================================================================
-class CSUHeap : public BaseHeap<DXVECTOR3>
+class CSUHeap : public BaseHeap<Vector3>
 {
 public:
 	CSUHeap() {}
@@ -120,7 +120,7 @@ public:
 	ID3D12DescriptorHeap*
 	GetHeap() { return m_pHeap.Get(); }
 
-	const DXVECTOR3&
+	const Vector3&
 	GetUseCount() { return m_useCount; }
 
 	// セッター

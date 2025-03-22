@@ -36,7 +36,7 @@ void SquarePolygon::Init(float w, float h, DWORD color)
 	desc.Flags            = D3D12_RESOURCE_FLAG_NONE;
 	desc.Layout           = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	DEVICE->CreateCommittedResource(
+	DEV->CreateCommittedResource(
 		&prop,
 		D3D12_HEAP_FLAG_NONE,
 		&desc,
@@ -55,7 +55,7 @@ void SquarePolygon::Init(float w, float h, DWORD color)
 
 void SquarePolygon::Draw()
 {
-	COMMAND->IASetVertexBuffers(0, 1, &m_vbView);
+	CMD->IASetVertexBuffers(0, 1, &m_vbView);
 
-	COMMAND->DrawInstanced(3, 1, 0, 0);
+	CMD->DrawInstanced(3, 1, 0, 0);
 }

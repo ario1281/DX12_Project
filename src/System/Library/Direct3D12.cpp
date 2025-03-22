@@ -1,7 +1,7 @@
 #include "define.h"
 #include "Direct3D12.h"
 
-bool Direct3D::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
+bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
 	//=======================================================
 	// ファクトリーの作成
@@ -72,7 +72,7 @@ bool Direct3D::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	return true;
 }
 
-void Direct3D::Prepare()
+void Direct3D12::Prepare()
 {
 	// リソースバリアのステートをレンダーターゲットに変更
 	auto bbIdx = m_pSwapChain->GetCurrentBackBufferIndex();
@@ -95,7 +95,7 @@ void Direct3D::Prepare()
 	m_upDepthStencil->ClearBuffer();
 }
 
-void Direct3D::ScreenFlip()
+void Direct3D12::ScreenFlip()
 {
 	// リソースバリアのステートをプレゼントに戻す
 	auto bbIdx = m_pSwapChain->GetCurrentBackBufferIndex();
@@ -123,7 +123,7 @@ void Direct3D::ScreenFlip()
 	m_pSwapChain->Present(1, 0);
 }
 
-void Direct3D::WaitForCommandQueue()
+void Direct3D12::WaitForCommandQueue()
 {
 	m_pCmdQueue->Signal(m_pFence.Get(), ++m_fenceVal);
 
@@ -143,7 +143,7 @@ void Direct3D::WaitForCommandQueue()
 
 
 
-bool Direct3D::CreateFactory()
+bool Direct3D12::CreateFactory()
 {
 	HRESULT hr;
 	UINT flag = 0;
@@ -169,7 +169,7 @@ bool Direct3D::CreateFactory()
 	return true;
 }
 
-bool Direct3D::CreateDevice()
+bool Direct3D12::CreateDevice()
 {
 	com_ptr<IDXGIAdapter>              pAdapter;
 	std::vector<com_ptr<IDXGIAdapter>> pAdapters;
@@ -248,7 +248,7 @@ bool Direct3D::CreateDevice()
 	return true;
 }
 
-bool Direct3D::CreateCommandList()
+bool Direct3D12::CreateCommandList()
 {
 	HRESULT hr;
 
@@ -278,7 +278,7 @@ bool Direct3D::CreateCommandList()
 	return true;
 }
 
-bool Direct3D::CreateSwapChain(HWND hwnd, int width, int height)
+bool Direct3D12::CreateSwapChain(HWND hwnd, int width, int height)
 {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	desc.Width              = width;
@@ -302,7 +302,7 @@ bool Direct3D::CreateSwapChain(HWND hwnd, int width, int height)
 	return true;
 }
 
-bool Direct3D::CreateDescriptorHeap()
+bool Direct3D12::CreateDescriptorHeap()
 {
 	m_pRTVHeap  = std::make_unique<RTVHeap>();
 	m_upCSUHeap = std::make_unique<CSUHeap>();
@@ -317,7 +317,7 @@ bool Direct3D::CreateDescriptorHeap()
 		return false;
 	}
 
-	if (!m_upCSUHeap->Create(HeapType::CSU, DXVECTOR3(100, 100, 100)))
+	if (!m_upCSUHeap->Create(HeapType::CSU, Vector3(100, 100, 100)))
 	{
 		assert(0 && "CBV, SRV, UAVヒープの作成失敗");
 		return false;
@@ -332,7 +332,7 @@ bool Direct3D::CreateDescriptorHeap()
 	return true;
 }
 
-bool Direct3D::CreateSwapChainRTV()
+bool Direct3D12::CreateSwapChainRTV()
 {
 	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
 	{
@@ -345,7 +345,7 @@ bool Direct3D::CreateSwapChainRTV()
 	return true;
 }
 
-bool Direct3D::CreateFence()
+bool Direct3D12::CreateFence()
 {
 	auto hr = m_pDevice->CreateFence(m_fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence));
 	if (FAILED(hr)) { return false; }
@@ -353,7 +353,7 @@ bool Direct3D::CreateFence()
 	return true;
 }
 
-void Direct3D::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after)
+void Direct3D12::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after)
 {
 	D3D12_RESOURCE_BARRIER barrier = {};
 	barrier.Transition.pResource   = pResource;

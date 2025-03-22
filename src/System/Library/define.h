@@ -73,6 +73,7 @@
 #pragma comment(lib,"DirectXTex.lib")
 
 using namespace DirectX;
+using namespace SimpleMath;
 
 
 //===============================================

@@ -16,7 +16,7 @@ int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
 	rtvDesc.Format        = DXGI_FORMAT_R8G8B8A8_UNORM;
 	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-	DEVICE->CreateRenderTargetView(pBuffer, &rtvDesc, handle);
+	DEV->CreateRenderTargetView(pBuffer, &rtvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
@@ -37,7 +37,7 @@ int DSVHeap::CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format)
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 	dsvDesc.Format        = format;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	DEVICE->CreateDepthStencilView(pBuffer, &dsvDesc, handle);
+	DEV->CreateDepthStencilView(pBuffer, &dsvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
@@ -66,7 +66,7 @@ int CSUHeap::CreateSRV(ID3D12Resource* pBuffer)
 		srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
 	}
 
-	DEVICE->CreateShaderResourceView(pBuffer, &srvDesc, handle);
+	DEV->CreateShaderResourceView(pBuffer, &srvDesc, handle);
 
 	return m_nextRegistNumber++;
 }
@@ -84,5 +84,5 @@ CSUHeap::GetGPUHandle(int number)
 void CSUHeap::SetHeap()
 {
 	ID3D12DescriptorHeap* ppHeaps[] = { m_pHeap.Get() };
-	COMMAND->SetDescriptorHeaps(1, ppHeaps);
+	CMD->SetDescriptorHeaps(1, ppHeaps);
 }

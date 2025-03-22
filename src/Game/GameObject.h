@@ -23,7 +23,7 @@ protected:
 	shared_ptr<MeshManager>    m_spModel = nullptr;
 	shared_ptr<TextureManager> m_spTex   = nullptr;
 
-	DXMATRIX                   m_mWorld;
+	Matrix                   m_mWorld;
 
 	std::string                m_tag     = "";
 	std::string                m_name    = "GameObject";

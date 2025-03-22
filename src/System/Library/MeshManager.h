@@ -1,15 +1,62 @@
 #pragma once
 
+class TextureManager;
+
+struct MeshVertex {
+	Vector3 pos;
+	Vector2 uv;
+	Vector3 normal;
+	UINT    color = 0xffffff;
+	Vector3 tan;
+};
+
+struct MeshFace {
+	UINT index[3];
+};
+
+struct Material
+{
+	std::string                name;
+
+	shared_ptr<TextureManager> spBaseColor;
+	Vector4                    baseColor = { 1,1,1,1 };
+
+	shared_ptr<TextureManager> spScaling;
+	float                      metalic = 0.0f;
+	float                      rough   = 1.0f;
+
+	shared_ptr<TextureManager> spEmissive;
+	Vector3                    emissive = { 0,0,0 };
+
+	shared_ptr<TextureManager> spNormal;
+};
+
+
 class MeshManager
 {
 public:
-	bool Load(const std::string &filename);
+	void Create(
+		const std::vector<MeshVertex>& verteces,
+		const std::vector<MeshFace>&   faces,
+		const Material                 material
+	);
 
-	void Draw();
+	void DrawInstanced(UINT verCount) const;
+
+#pragma region Žæ“¾Œn
+
+	UINT GetInstCount() const { return m_instCount; }
+
+	const Material& GetMaterial() const { return m_material; }
+
+#pragma endregion
 
 private:
-	com_ptr<ID3D12Resource> m_VBuffer;
-	com_ptr<ID3D12Resource> m_IBuffer;
+	com_ptr<ID3D12Resource>  m_pVBuffer = nullptr;
+	com_ptr<ID3D12Resource>  m_pIBuffer = nullptr;
+	D3D12_VERTEX_BUFFER_VIEW m_vbView;
+	D3D12_INDEX_BUFFER_VIEW  m_ibView;
 
-	std::string m_fileName;
+	UINT     m_instCount;
+	Material m_material;
 };

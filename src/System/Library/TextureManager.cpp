@@ -37,7 +37,7 @@ bool TextureManager::Load(const std::wstring &filename)
 	resDesc.Flags              = D3D12_RESOURCE_FLAG_NONE;
 
 	// Texture—pResourceBuffer‚ðì¬
-	hr = DEVICE->CreateCommittedResource(
+	hr = DEV->CreateCommittedResource(
 		&texProp, D3D12_HEAP_FLAG_NONE,
 		&resDesc, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
 		nullptr,
