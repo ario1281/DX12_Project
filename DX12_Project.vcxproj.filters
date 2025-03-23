@@ -117,6 +117,5 @@
     <None Include="data\Shader\BasicShaderHeader.hlsli">
       <Filter>data\Shader</Filter>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

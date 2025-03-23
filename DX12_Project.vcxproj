@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Shader\BasicShaderHeader.hlsli" />
-    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

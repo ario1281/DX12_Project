@@ -1,5 +1,7 @@
 #pragma once
 
+class GameObject;
+
 class SceneBase
 {
 public:
