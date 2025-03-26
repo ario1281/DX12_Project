@@ -48,11 +48,11 @@ inline HRESULT stow_s(_In_ const std::string& str, _Out_ std::wstring& wstr) {
 
 
 template<class T>
-using com_ptr = Microsoft::WRL::ComPtr<T>;
+using com_ptr    = Microsoft::WRL::ComPtr<T>;
 
 template<class T>
 using shared_ptr = std::shared_ptr<T>;
 template<class T>
 using unique_ptr = std::unique_ptr<T>;
 template<class T>
-using weak_ptr = std::weak_ptr<T>;
+using weak_ptr   = std::weak_ptr<T>;

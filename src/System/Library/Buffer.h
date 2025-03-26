@@ -1,13 +1,5 @@
 #pragma once
 
-enum class DepthStencilFormat
-{
-	DepthLowQuality            = DXGI_FORMAT_R16_TYPELESS,
-	DepthHighQuality           = DXGI_FORMAT_R32_TYPELESS,
-	DepthHighQualityAndStencil = DXGI_FORMAT_R24G8_TYPELESS,
-};
-
-
 class Buffer
 {
 public:
@@ -16,6 +8,14 @@ public:
 
 protected:
 	com_ptr<ID3D12Resource> m_pBuffer = nullptr;
+};
+
+
+enum class DepthStencilFormat
+{
+	DepthLowQuality            = DXGI_FORMAT_R16_TYPELESS,
+	DepthHighQuality           = DXGI_FORMAT_R32_TYPELESS,
+	DepthHighQualityAndStencil = DXGI_FORMAT_R24G8_TYPELESS,
 };
 
 /// <summary>
@@ -39,7 +39,7 @@ public:
 	/// </summary>
 	void ClearBuffer();
 
-#pragma region 取得系
+	#pragma region 取得系
 
 	/// <summary>
 	/// DSV番号を取得
@@ -47,7 +47,7 @@ public:
 	/// <returns>DSV番号</returns>
 	UINT GetDSVNumber() { return m_dsvNumber; }
 
-#pragma endregion
+	#pragma endregion
 
 private:
 	UINT m_dsvNumber = 0;
@@ -83,4 +83,37 @@ private:
 	struct { char buf[256]; }* m_pMapBuffer = nullptr;
 
 	int      m_curUseNumber = 0;
+};
+
+/// <summary>
+/// テクスチャ
+/// </summary>
+class Texture : public Buffer
+{
+public:
+	/// <summary>
+	/// テクスチャのロード
+	/// </summary>
+	/// <param name="filePath">ファイルパス</param>
+	/// <returns>ロードが成功したらtrue</returns>
+	bool Load(const std::string& filename);
+
+	/// <summary>
+	/// シェーダーリソースとしてセット
+	/// </summary>
+	/// <param name="index">インデックス</param>
+	void Set(int index);
+
+	#pragma region 取得系
+
+	/// <summary>
+	/// SRV番号を取得
+	/// </summary>
+	/// <returns>SRV番号</returns>
+	int GetSRVNumber() { return m_srvNumber; }
+
+	#pragma endregion
+
+private:
+	int m_srvNumber = 0;
 };

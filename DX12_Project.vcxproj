@@ -21,10 +21,12 @@
     <ClInclude Include="src\System\Library\Direct3D12.h" />
     <ClInclude Include="src\System\Library\Heap.h" />
     <ClInclude Include="src\System\Library\Helper.h" />
-    <ClInclude Include="src\System\Library\MeshManager.h" />
+    <ClInclude Include="src\System\Library\Mesh.h" />
+    <ClInclude Include="src\System\Library\Model.h" />
+    <ClInclude Include="src\System\Library\RootSignature.h" />
     <ClInclude Include="src\System\Library\SceneManager.h" />
     <ClInclude Include="src\System\Library\SquarePolygon.h" />
-    <ClInclude Include="src\System\Library\TextureManager.h" />
+    <ClInclude Include="src\System\Library\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\GameObject.cpp" />
@@ -40,10 +42,12 @@
     <ClCompile Include="src\System\Library\Direct3D12.cpp" />
     <ClCompile Include="src\System\Library\Heap.cpp" />
     <ClCompile Include="src\System\Library\Helper.cpp" />
-    <ClCompile Include="src\System\Library\MeshManager.cpp" />
+    <ClCompile Include="src\System\Library\Mesh.cpp" />
+    <ClCompile Include="src\System\Library\Model.cpp" />
+    <ClCompile Include="src\System\Library\RootSignature.cpp" />
     <ClCompile Include="src\System\Library\SceneManager.cpp" />
+    <ClCompile Include="src\System\Library\Shader.cpp" />
     <ClCompile Include="src\System\Library\SquarePolygon.cpp" />
-    <ClCompile Include="src\System\Library\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\Shader\BasicPixelShader.hlsl">

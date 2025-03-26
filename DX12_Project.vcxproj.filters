@@ -45,10 +45,7 @@
     <ClInclude Include="src\Game\GameObject.h">
       <Filter>src\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Library\TextureManager.h">
-      <Filter>src\System\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\System\Library\MeshManager.h">
+    <ClInclude Include="src\System\Library\Mesh.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
     <ClInclude Include="src\System\Library\SquarePolygon.h">
@@ -61,6 +58,15 @@
       <Filter>src\System\Library</Filter>
     </ClInclude>
     <ClInclude Include="src\System\Library\SceneManager.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\Model.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\Shader.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Library\RootSignature.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,10 +92,7 @@
     <ClCompile Include="src\Game\GameObject.cpp">
       <Filter>src\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Library\TextureManager.cpp">
-      <Filter>src\System\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\Library\MeshManager.cpp">
+    <ClCompile Include="src\System\Library\Mesh.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\SquarePolygon.cpp">
@@ -102,6 +105,15 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\SceneManager.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Model.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Shader.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\RootSignature.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

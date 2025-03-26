@@ -1,6 +1,6 @@
 #pragma once
 
-class TextureManager;
+class Texture;
 
 struct MeshVertex {
 	Vector3 pos;
@@ -18,21 +18,21 @@ struct Material
 {
 	std::string                name;
 
-	shared_ptr<TextureManager> spBaseColor;
+	shared_ptr<Texture> spBaseColor;
 	Vector4                    baseColor = { 1,1,1,1 };
 
-	shared_ptr<TextureManager> spScaling;
+	shared_ptr<Texture> spScaling;
 	float                      metalic = 0.0f;
 	float                      rough   = 1.0f;
 
-	shared_ptr<TextureManager> spEmissive;
+	shared_ptr<Texture> spEmissive;
 	Vector3                    emissive = { 0,0,0 };
 
-	shared_ptr<TextureManager> spNormal;
+	shared_ptr<Texture> spNormal;
 };
 
 
-class MeshManager
+class Mesh
 {
 public:
 	void Create(
@@ -43,13 +43,13 @@ public:
 
 	void DrawInstanced(UINT verCount) const;
 
-#pragma region Žæ“¾Œn
+	#pragma region Žæ“¾Œn
 
 	UINT GetInstCount() const { return m_instCount; }
 
 	const Material& GetMaterial() const { return m_material; }
 
-#pragma endregion
+	#pragma endregion
 
 private:
 	com_ptr<ID3D12Resource>  m_pVBuffer = nullptr;

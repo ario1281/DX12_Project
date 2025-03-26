@@ -13,6 +13,7 @@
 //===========================
 #include"Game/GameWindow.h"
 
+
 class System
 {
 public:
@@ -35,9 +36,9 @@ public:
 	// グローバルデータ
 	//=================================================
 
-	HINSTANCE  m_hInst = nullptr; // インスタンスハンドル
-	DWORD      m_FrameCnt = 0;    // 現在フレーム地
-	int        m_Fps = 0;         // FPS値
+	HINSTANCE  m_hInst    = nullptr; // インスタンスハンドル
+	DWORD      m_FrameCnt = 0;       // 現在フレーム地
+	int        m_Fps      = 0;       // FPS値
 
 private:
 

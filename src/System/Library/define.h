@@ -90,6 +90,5 @@ using namespace SimpleMath;
 
 #include "SceneManager.h"
 
-#include "TextureManager.h"
-#include "MeshManager.h"
+#include "Mesh.h"
 

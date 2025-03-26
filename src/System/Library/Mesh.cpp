@@ -1,6 +1,6 @@
-#include "MeshManager.h"
+#include "Mesh.h"
 
-void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vector<MeshFace>& faces, const Material material)
+void Mesh::Create(const std::vector<MeshVertex>& verteces, const std::vector<MeshFace>& faces, const Material material)
 {
 	HRESULT hr;
 
@@ -20,7 +20,7 @@ void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vec
 
 	D3D12_RESOURCE_DESC resDesc = {};
 
-#pragma region バーテックスバッファ作成
+	#pragma region バーテックスバッファ作成
 
 	resDesc.Dimension        = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width            = sizeof(MeshVertex) * verteces.size();
@@ -54,9 +54,9 @@ void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vec
 		m_pVBuffer->Unmap(0, nullptr);
 	}
 
-#pragma endregion
+	#pragma endregion
 
-#pragma region インデクスバッファ作成
+	#pragma region インデクスバッファ作成
 
 	resDesc.Dimension        = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width            = sizeof(MeshFace) * faces.size();
@@ -92,11 +92,11 @@ void MeshManager::Create(const std::vector<MeshVertex>& verteces, const std::vec
 		m_pIBuffer->Unmap(0, nullptr);
 	}
 
-#pragma endregion
+	#pragma endregion
 
 }
 
-void MeshManager::DrawInstanced(UINT verCount) const
+void Mesh::DrawInstanced(UINT verCount) const
 {
 	CMD->IASetVertexBuffers(0, 1, &m_vbView);
 	CMD->IASetIndexBuffer(&m_ibView);

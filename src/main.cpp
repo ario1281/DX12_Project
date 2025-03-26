@@ -30,6 +30,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_  HINSTANCE hPrev, _In_ LPSTR l
 	return 0;
 }
 
+
 bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 {
 	// インスタンスハンドル記憶
