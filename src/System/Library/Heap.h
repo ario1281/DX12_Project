@@ -113,9 +113,8 @@ public:
 
 	int CreateSRV(ID3D12Resource* pBuffer);
 
-#pragma region アクセサー
+	#pragma region 取得系
 
-	// ゲッター
 	const D3D12_GPU_DESCRIPTOR_HANDLE
 	GetGPUHandle(int number) override;
 
@@ -125,9 +124,9 @@ public:
 	const Vector3&
 	GetUseCount() { return m_useCount; }
 
-	// セッター
+
 	void SetHeap();
 
-#pragma endregion
+	#pragma endregion
 
 };

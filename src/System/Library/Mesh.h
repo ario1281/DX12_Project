@@ -16,17 +16,17 @@ struct MeshFace {
 
 struct Material
 {
-	std::string                name;
+	std::string         name;
 
 	shared_ptr<Texture> spBaseColor;
-	Vector4                    baseColor = { 1,1,1,1 };
+	Vector4             baseColor = { 1,1,1,1 };
 
 	shared_ptr<Texture> spScaling;
-	float                      metalic = 0.0f;
-	float                      rough   = 1.0f;
+	float               metalic = 0.0f;
+	float               rough   = 1.0f;
 
 	shared_ptr<Texture> spEmissive;
-	Vector3                    emissive = { 0,0,0 };
+	Vector3             emissive = { 0,0,0 };
 
 	shared_ptr<Texture> spNormal;
 };

@@ -7,7 +7,7 @@ bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const st
 		メインウィンドウ作成
 	===================================================================*/
 
-#pragma region ウィンドウクラスの定義
+	#pragma region ウィンドウクラスの定義
 
 	WNDCLASSEX wc = {};
 	wc.cbSize        = sizeof(WNDCLASSEX);
@@ -23,7 +23,7 @@ bool GameWindow::Create(HINSTANCE _hInst, int _showCmd, int _w, int _h, const st
 	wc.lpszMenuName  = nullptr;
 	wc.lpszClassName = _wndName.c_str();
 
-#pragma endregion
+	#pragma endregion
 
 	if (!RegisterClassEx(&wc)) { return false; }
 
@@ -130,7 +130,7 @@ LRESULT GameWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	m_MouseFlg = false;
 	switch (msg)
 	{
-#pragma region Alt＋キーが押された
+	#pragma region Alt＋キーが押された
 	case WM_SYSKEYDOWN:
 		m_AnyKeyFlg = true;
 		switch (wParam)
@@ -151,9 +151,9 @@ LRESULT GameWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			return DefWindowProc(hWnd, msg, wParam, lParam);
 		}
 		break;
-#pragma endregion
+	#pragma endregion
 
-#pragma region キーが押された
+	#pragma region キーが押された
 	case WM_KEYDOWN:
 		m_AnyKeyFlg = true;
 		switch (wParam)
@@ -164,7 +164,7 @@ LRESULT GameWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			return DefWindowProc(hWnd, msg, wParam, lParam);
 		}
 		break;
-#pragma endregion
+	#pragma endregion
 
 		// ホイールスクロール時
 	case WM_MOUSEWHEEL:

@@ -69,6 +69,9 @@
     <ClInclude Include="src\System\Library\RootSignature.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Library\Pipeline.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -114,6 +117,9 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\RootSignature.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Library\Pipeline.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

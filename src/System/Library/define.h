@@ -84,6 +84,7 @@ using namespace SimpleMath;
 
 #include "Helper.h"
 
+
 #include "Direct3D12.h"
 #include "Heap.h"
 #include "Buffer.h"
@@ -91,4 +92,8 @@ using namespace SimpleMath;
 #include "SceneManager.h"
 
 #include "Mesh.h"
+#include "Model.h"
 
+#include "Pipeline.h"
+#include "RootSignature.h"
+#include "Shader.h"

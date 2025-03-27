@@ -35,7 +35,7 @@ public:
 	/// </summary>
 	void WaitForCommandQueue();
 
-#pragma region Žæ“¾Œn
+	#pragma region Žæ“¾Œn
 
 	ID3D12Device8*
 	GetDevice() const { return m_pDevice.Get(); }
@@ -57,6 +57,7 @@ public:
 		}
 	}
 
+	
 #pragma endregion
 
 private:
