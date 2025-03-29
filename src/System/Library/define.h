@@ -54,27 +54,42 @@
 //  DirectX12
 //  
 //===============================================
-#include <d3d12.h>
-#include <d3dx12.h>
-#include <dxgi1_6.h>
-#include <dxgidebug.h>
-#include <DirectXMath.h>
-
-#include <d3dcompiler.h>
-#include <DirectXTex.h>
-
-#include <SimpleMath.h>
-
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
-#pragma comment(lib, "DirectXTK12.lib")
+#include <d3d12.h>
+#include <dxgi1_6.h>
+#include <dxgidebug.h>
+#include <d3dcompiler.h>
+
+// DirectX Tex
 #pragma comment(lib,"DirectXTex.lib")
+#include <DirectXTex.h>
 
 using namespace DirectX;
-using namespace SimpleMath;
 
+// DirectX Tool Kit
+#pragma comment(lib, "DirectXTK12.lib")
+#include <SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
+
+
+//===============================================
+//  
+//  assimp
+//  
+//===============================================
+//#ifdef _DEBUG
+//#pragma comment(lib, "assimp-vc143-mtd.lib")
+//#else
+//#pragma comment(lib, "assimp-vc143-mt.lib")
+//#endif // _DEBUG
+//
+//#include <assimp/Importer.hpp>
+//#include <assimp/scene.h>
+//#include <assimp/postprocess.h>
 
 //===============================================
 //  
