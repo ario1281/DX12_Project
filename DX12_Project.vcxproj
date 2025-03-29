@@ -23,8 +23,6 @@
     <ClInclude Include="src\System\Library\Helper.h" />
     <ClInclude Include="src\System\Library\Mesh.h" />
     <ClInclude Include="src\System\Library\Model.h" />
-    <ClInclude Include="src\System\Library\Pipeline.h" />
-    <ClInclude Include="src\System\Library\RootSignature.h" />
     <ClInclude Include="src\System\Library\SceneManager.h" />
     <ClInclude Include="src\System\Library\SquarePolygon.h" />
     <ClInclude Include="src\System\Library\Shader.h" />
@@ -45,8 +43,6 @@
     <ClCompile Include="src\System\Library\Helper.cpp" />
     <ClCompile Include="src\System\Library\Mesh.cpp" />
     <ClCompile Include="src\System\Library\Model.cpp" />
-    <ClCompile Include="src\System\Library\Pipeline.cpp" />
-    <ClCompile Include="src\System\Library\RootSignature.cpp" />
     <ClCompile Include="src\System\Library\SceneManager.cpp" />
     <ClCompile Include="src\System\Library\Shader.cpp" />
     <ClCompile Include="src\System\Library\SquarePolygon.cpp" />

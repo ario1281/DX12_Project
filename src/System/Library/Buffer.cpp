@@ -1,5 +1,7 @@
 #include "Buffer.h"
 
+#pragma region DepthStencil
+
 bool DepthStencil::Create(const Vector2 _resolute, DepthStencilFormat _format)
 {
 	HRESULT hr;
@@ -66,6 +68,9 @@ void DepthStencil::ClearBuffer()
 	);
 }
 
+#pragma endregion
+
+#pragma region CBufferAllocator
 
 void CBufferAllocator::Create(CSUHeap* pHeap)
 {
@@ -149,6 +154,9 @@ inline void CBufferAllocator::BindAndAttachData(int dscIdx, const T& data)
 	m_curUseNumber += useValue;
 }
 
+#pragma endregion
+
+#pragma region Texture
 
 bool Texture::Load(const std::string& filename)
 {
@@ -216,3 +224,5 @@ void Texture::Set(int index)
 		index, D3D.GetCSUHeap()->GetGPUHandle(m_srvNumber)
 	);
 }
+
+#pragma endregion

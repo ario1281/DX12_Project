@@ -1,5 +1,7 @@
 #pragma once
 
+class ModelLoader;
+
 class Model
 {
 public:
@@ -25,4 +27,12 @@ public:
 
 private:
 	std::vector<Node> m_nodes;
+};
+
+class ModelLoader
+{
+public:
+
+private:
+
 };

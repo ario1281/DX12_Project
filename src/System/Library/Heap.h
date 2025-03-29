@@ -1,12 +1,16 @@
 #pragma once
 
+#pragma region 定数型
+
 enum class HeapType
 {
-	RTV     = D3D12_DESCRIPTOR_HEAP_TYPE_RTV,
-	DSV     = D3D12_DESCRIPTOR_HEAP_TYPE_DSV,
 	CSU     = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
+	DSV     = D3D12_DESCRIPTOR_HEAP_TYPE_DSV,
+	RTV     = D3D12_DESCRIPTOR_HEAP_TYPE_RTV,
 	SAMPLER = D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER,
 };
+
+#pragma endregion
 
 template<typename TempHeap>
 class BaseHeap
@@ -73,34 +77,6 @@ private:
 };
 
 //===================================================================
-//  
-//  レンダーターゲットビュー     (RTV)
-//  
-//===================================================================
-class RTVHeap : public BaseHeap<int>
-{
-public:
-	RTVHeap() {}
-	~RTVHeap() {}
-
-	int CreateRTV(ID3D12Resource* pBuffer);
-};
-
-//===================================================================
-//  
-//  デプスステンシルビュー       (DSV)
-//  
-//===================================================================
-class DSVHeap : public BaseHeap<int>
-{
-public:
-	DSVHeap() {}
-	~DSVHeap() {}
-
-	int CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format);
-};
-
-//===================================================================
 //  定数バッファービュー         (CBV)
 //  シェーダリソースビュー       (SRV)
 //  アンオーダードアクセスビュー (UAV)
@@ -129,4 +105,32 @@ public:
 
 	#pragma endregion
 
+};
+
+//===================================================================
+//  
+//  デプスステンシルビュー       (DSV)
+//  
+//===================================================================
+class DSVHeap : public BaseHeap<int>
+{
+public:
+	DSVHeap() {}
+	~DSVHeap() {}
+
+	int CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format);
+};
+
+//===================================================================
+//  
+//  レンダーターゲットビュー     (RTV)
+//  
+//===================================================================
+class RTVHeap : public BaseHeap<int>
+{
+public:
+	RTVHeap() {}
+	~RTVHeap() {}
+
+	int CreateRTV(ID3D12Resource* pBuffer);
 };

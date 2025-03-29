@@ -94,6 +94,4 @@ using namespace SimpleMath;
 #include "Mesh.h"
 #include "Model.h"
 
-#include "Pipeline.h"
-#include "RootSignature.h"
 #include "Shader.h"

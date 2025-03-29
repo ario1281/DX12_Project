@@ -1,7 +1,8 @@
 #include "define.h"
 #include "Heap.h"
 
-// RTV
+#pragma region RTVHeap
+
 int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 {
 	if (m_useCount < m_nextRegistNumber)
@@ -21,8 +22,10 @@ int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 	return m_nextRegistNumber++;
 }
 
+#pragma endregion
 
-// DSV
+#pragma region DSVHeap
+
 int DSVHeap::CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format)
 {
 	if (m_useCount < m_nextRegistNumber)
@@ -42,8 +45,10 @@ int DSVHeap::CreateDSV(ID3D12Resource* pBuffer, DXGI_FORMAT format)
 	return m_nextRegistNumber++;
 }
 
+#pragma endregion
 
-// CBV SRV UAV
+#pragma region CSUHeap
+
 int CSUHeap::CreateSRV(ID3D12Resource* pBuffer)
 {
 	if (m_useCount.y < m_nextRegistNumber)
@@ -86,3 +91,5 @@ void CSUHeap::SetHeap()
 	ID3D12DescriptorHeap* ppHeaps[] = { m_pHeap.Get() };
 	CMD->SetDescriptorHeaps(1, ppHeaps);
 }
+
+#pragma endregion

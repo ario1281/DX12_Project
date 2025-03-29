@@ -1,5 +1,16 @@
 #pragma once
 
+#pragma region íËêîå^
+
+enum class DepthStencilFormat
+{
+	DepthLowQuality = DXGI_FORMAT_R16_TYPELESS,
+	DepthHighQuality = DXGI_FORMAT_R32_TYPELESS,
+	DepthHighQualityAndStencil = DXGI_FORMAT_R24G8_TYPELESS,
+};
+
+#pragma endregion
+
 class Buffer
 {
 public:
@@ -8,14 +19,6 @@ public:
 
 protected:
 	com_ptr<ID3D12Resource> m_pBuffer = nullptr;
-};
-
-
-enum class DepthStencilFormat
-{
-	DepthLowQuality            = DXGI_FORMAT_R16_TYPELESS,
-	DepthHighQuality           = DXGI_FORMAT_R32_TYPELESS,
-	DepthHighQualityAndStencil = DXGI_FORMAT_R24G8_TYPELESS,
 };
 
 /// <summary>

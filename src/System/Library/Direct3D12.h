@@ -1,8 +1,8 @@
 #pragma once
 
-class RTVHeap;
-class DSVHeap;
 class CSUHeap;
+class DSVHeap;
+class RTVHeap;
 
 class CBufferAllocator;
 class DepthStencil;

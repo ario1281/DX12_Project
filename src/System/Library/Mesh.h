@@ -1,6 +1,6 @@
 #pragma once
 
-class Texture;
+#pragma region ç\ë¢å^
 
 struct MeshVertex {
 	Vector3 pos;
@@ -9,11 +9,9 @@ struct MeshVertex {
 	UINT    color = 0xffffff;
 	Vector3 tan;
 };
-
 struct MeshFace {
 	UINT index[3];
 };
-
 struct Material
 {
 	std::string         name;
@@ -31,6 +29,9 @@ struct Material
 	shared_ptr<Texture> spNormal;
 };
 
+#pragma endregion
+
+class Texture;
 
 class Mesh
 {
