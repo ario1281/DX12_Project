@@ -11,6 +11,10 @@ void SceneBase::Frame()
 	D3D.GetCSUHeap()->SetHeap();
 	D3D.GetCBufferAllocator()->ResetCurrentUseNumber();
 
+	D3D.GetCBufferAllocator()->ResetCurrentUseNumber();
+
+	Render3D();
+
 	D3D.ScreenFlip();
 }
 

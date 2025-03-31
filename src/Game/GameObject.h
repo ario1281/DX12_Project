@@ -8,6 +8,8 @@ public:
 
 	#pragma region Žæ“¾Œn
 
+	const Mesh* GetModel() { return m_spModel.get(); }
+	const Matrix& GetWorldMatrix() { return m_mWorld; }
 	inline const std::string& GetTag() const { return m_tag; }
 	inline const std::string& GetName() const { return m_name; }
 

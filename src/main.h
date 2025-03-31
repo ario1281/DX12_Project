@@ -23,6 +23,21 @@ public:
 
 	void EndGame() { m_EndFlg = true; }
 
+	#pragma region 取得系
+
+	const HWND& GetHWnd() const { return m_Window.GetHWnd(); }
+	const bool GetAnyKeyFlag() const { return m_Window.GetAnyKeyFlag(); }
+	const bool GetMouseFlag() const { return m_Window.GetMouseFlag(); }
+	bool GetSceneFlag() { return m_sceneFlg; }
+	void SetSceneFlag() { m_sceneFlg = false; }
+
+	void SetChangeScene(SceneBase* s_scene) {
+		m_sceneFlg = true;
+		m_Scene = s_scene;
+	}
+
+	#pragma endregion
+
 	//=================================================
 	// 公開データ
 	//=================================================

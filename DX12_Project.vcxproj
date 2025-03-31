@@ -21,14 +21,19 @@
   <ItemGroup>
     <ClInclude Include="src\Game\GameObject.h" />
     <ClInclude Include="src\Game\GameWindow.h" />
+    <ClInclude Include="src\Game\Object\CameraComponent.h" />
     <ClInclude Include="src\Game\SceneBase.h" />
+    <ClInclude Include="src\Game\Scene\GameScene.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\Pch.h" />
     <ClInclude Include="src\System\Library\Buffer.h" />
+    <ClInclude Include="src\System\Library\CameraManager.h" />
     <ClInclude Include="src\System\Library\define.h" />
     <ClInclude Include="src\System\Library\Direct3D12.h" />
     <ClInclude Include="src\System\Library\Heap.h" />
     <ClInclude Include="src\System\Library\Helper.h" />
+    <ClInclude Include="src\System\Library\InputComponent.h" />
+    <ClInclude Include="src\System\Library\Math.h" />
     <ClInclude Include="src\System\Library\Mesh.h" />
     <ClInclude Include="src\System\Library\Model.h" />
     <ClInclude Include="src\System\Library\SceneManager.h" />
@@ -38,7 +43,10 @@
   <ItemGroup>
     <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\Game\GameWindow.cpp" />
+    <ClCompile Include="src\Game\Object\CameraCompnent.cpp" />
+    <ClCompile Include="src\Game\Object\ComeraComponent.cpp" />
     <ClCompile Include="src\Game\SceneBase.cpp" />
+    <ClCompile Include="src\Game\Scene\GameScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -46,9 +54,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\System\Library\Buffer.cpp" />
+    <ClCompile Include="src\System\Library\CameraManager.cpp" />
     <ClCompile Include="src\System\Library\Direct3D12.cpp" />
     <ClCompile Include="src\System\Library\Heap.cpp" />
     <ClCompile Include="src\System\Library\Helper.cpp" />
+    <ClCompile Include="src\System\Library\InputComponent.cpp" />
+    <ClCompile Include="src\System\Library\Math.cpp" />
     <ClCompile Include="src\System\Library\Mesh.cpp" />
     <ClCompile Include="src\System\Library\Model.cpp" />
     <ClCompile Include="src\System\Library\SceneManager.cpp" />
@@ -139,7 +150,7 @@
       <PreprocessorDefinitions>_DEBUG;_X64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\DirectXTK12\include;..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <SDLCheck>true</SDLCheck>
@@ -154,7 +165,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\DirectXTK12\lib\$(Platform)\$(Configuration);..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
@@ -175,7 +186,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\DirectXTK12\include;..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_X64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -195,7 +206,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\DirectXTK12\lib\$(Platform)\$(Configuration);..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <DelayLoadDLLs>assimp-vc143-mt.dll</DelayLoadDLLs>
@@ -203,21 +214,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\DirectXTK12\include;..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\DirectXTK12\lib\$(Platform)\$(Configuration);..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>assimp-vc143-mtd.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\DirectXTK12\include;..\lib\DirectXTex\include;..\lib\assimp\include;src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\DirectXTK12\lib\$(Platform)\$(Configuration);..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>assimp-vc143-mt.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>

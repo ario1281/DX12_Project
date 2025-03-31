@@ -1,15 +1,8 @@
 #include"main.h"
 
 
-#ifdef _X64
 int WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_  HINSTANCE hPrev, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
-#elif _X86
-int WinMain()
-{
-	HINSTANCE hInst = GetModuleHandle(0);
-	int nShowCmd = SW_SHOW;
-#endif // _WIN32
 
 	// ÉÅÉÇÉäÉäÅ[ÉNÇímÇÁÇπÇÈ
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);

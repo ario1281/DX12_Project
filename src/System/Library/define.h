@@ -73,8 +73,8 @@ using namespace DirectX;
 #pragma comment(lib, "DirectXTK12.lib")
 #include <SimpleMath.h>
 
-using namespace DirectX::SimpleMath;
-
+using Vector2 = SimpleMath::Vector2;
+using Vector4 = SimpleMath::Vector4;
 
 //===============================================
 //  
@@ -99,14 +99,18 @@ using namespace DirectX::SimpleMath;
 
 #include "Helper.h"
 
+#include "Math.h"
 
 #include "Direct3D12.h"
 #include "Heap.h"
 #include "Buffer.h"
 
 #include "SceneManager.h"
+#include"CameraManager.h"
 
 #include "Mesh.h"
 #include "Model.h"
+
+#include "InputComponent.h"
 
 #include "Shader.h"
