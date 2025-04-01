@@ -137,7 +137,6 @@
     <ClCompile Include="src\Game\Object\ComeraComponent.cpp">
       <Filter>src\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Object\CameraCompnent.cpp" />
     <ClCompile Include="src\System\Library\Math.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>

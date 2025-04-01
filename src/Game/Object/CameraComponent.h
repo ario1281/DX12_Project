@@ -14,5 +14,5 @@ private:
 	weak_ptr<GameObject> m_wpOwner;
 	CameraManager        m_camera;
 
-	Vector3              m_mOffset = { 0,1.25f,-5.0f };
+	Vector3              m_vOffset = { 0,1.25f,-5.0f };
 };

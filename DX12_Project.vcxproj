@@ -43,7 +43,6 @@
   <ItemGroup>
     <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\Game\GameWindow.cpp" />
-    <ClCompile Include="src\Game\Object\CameraCompnent.cpp" />
     <ClCompile Include="src\Game\Object\ComeraComponent.cpp" />
     <ClCompile Include="src\Game\SceneBase.cpp" />
     <ClCompile Include="src\Game\Scene\GameScene.cpp" />

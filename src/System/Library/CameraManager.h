@@ -15,7 +15,7 @@ public:
 
 	#pragma endregion
 
-	void CameraToVew()
+	void CameraToView()
 	{
 		m_mView = m_mCam;
 		m_mView.Inverse();
