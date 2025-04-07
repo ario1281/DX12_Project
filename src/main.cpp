@@ -59,10 +59,9 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 	//===================================================================
 	// @Direct3D‰Šú‰»
 	//===================================================================
-	std::string errMsg = "";
-	if (!D3D.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen, errMsg))
+	if (!D3D.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen))
 	{
-		MessageBox(m_Window.GetHWnd(), errMsg.c_str(), "Direct3D‰Šú‰»¸”s", MB_OK | MB_ICONSTOP);
+		MessageBox(m_Window.GetHWnd(), "", "Direct3D‰Šú‰»¸”s", MB_OK | MB_ICONSTOP);
 		return false;
 	}
 

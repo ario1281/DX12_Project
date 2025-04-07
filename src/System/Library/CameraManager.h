@@ -19,8 +19,6 @@ public:
 	const Matrix& GetView() const { return m_stCam.mView; }
 	const Matrix& GetProj() const { return m_stCam.mProj; }
 
-	StCamera& GetStCam() const { return m_stCam; }
-
 	#pragma endregion
 
 	void CameraToView()
