@@ -3,15 +3,15 @@
 
 bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
-	//=======================================================
-	// ファクトリーの作成
-	//=======================================================
-	if (!CreateFactory())
-	{
-		assert(0 && "D3D12デバイス作成失敗");
-		return false;
-	}
+	#ifdef _DEBUG
 
+	// デバッグレイヤーを有効にする
+	com_ptr<ID3D12Debug> _debug;
+	D3D12GetDebugInterface(IID_PPV_ARGS(&_debug));
+	_debug->EnableDebugLayer();
+
+	#endif // _DEBUG
+	
 	//=======================================================
 	// デバイスの作成
 	//=======================================================
@@ -156,30 +156,11 @@ void Direct3D12::WaitForCommandQueue()
 
 
 
-bool Direct3D12::CreateFactory()
+bool Direct3D12::CreateDevice()
 {
 	HRESULT hr;
 	UINT flag = 0;
 
-#if defined(_DEBUG)
-
-	flag |= DXGI_CREATE_FACTORY_DEBUG;
-
-	com_ptr<ID3D12Debug> _debug;
-	D3D12GetDebugInterface(IID_PPV_ARGS(&_debug));
-	_debug->EnableDebugLayer();              // デバッグレイヤーを有効にする
-
-#endif // _DEBUG
-
-
-	hr = CreateDXGIFactory2(flag, IID_PPV_ARGS(&m_pDxgiFactory));
-	if (FAILED(hr)) { return false; }
-
-	return true;
-}
-
-bool Direct3D12::CreateDevice()
-{
 	com_ptr<IDXGIAdapter>              pAdapter;
 	std::vector<com_ptr<IDXGIAdapter>> pAdapters;
 	std::vector<DXGI_ADAPTER_DESC>     descs;
@@ -190,6 +171,20 @@ bool Direct3D12::CreateDevice()
 		D3D_FEATURE_LEVEL_11_1,
 		D3D_FEATURE_LEVEL_11_0,
 	};
+
+	#ifdef _DEBUG
+
+	flag |= DXGI_CREATE_FACTORY_DEBUG;
+
+	// デバッグレイヤーを有効にする
+	com_ptr<ID3D12Debug> _debug;
+	D3D12GetDebugInterface(IID_PPV_ARGS(&_debug));
+	_debug->EnableDebugLayer();
+
+	#endif // _DEBUG
+
+	hr = CreateDXGIFactory2(flag, IID_PPV_ARGS(&m_pDxgiFactory));
+	if (FAILED(hr)) { return false; }
 
 	for (UINT i = 0; true; ++i)
 	{

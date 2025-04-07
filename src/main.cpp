@@ -52,16 +52,17 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 	//===================================================================
 	if (!m_Window.Create(_hInst, _showCmd, _w, _h, "Window"))
 	{
-		assert(0 && "ウィンドウ作成失敗");
+		MessageBox(nullptr, "ウィンドウ作成に失敗", "エラー", MB_OK);
 		return false;
 	}
 
 	//===================================================================
 	// 　Direct3D初期化
 	//===================================================================
-	if (!D3D.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen))
+	std::string errMsg = "";
+	if (!D3D.Init(_hInst, m_Window.GetHWnd(), _w, _h, fullScreen, errMsg))
 	{
-		assert(0 && "Direct3D初期化失敗");
+		MessageBox(m_Window.GetHWnd(), errMsg.c_str(), "Direct3D初期化失敗", MB_OK | MB_ICONSTOP);
 		return false;
 	}
 

@@ -28,5 +28,5 @@ bool CameraComponent::Update(const std::list<shared_ptr<GameObject>>* obj)
 	m_camera.CameraToView();
 	m_camera.CreateParspectiveFovLH(45.0f, 16.0f / 9.0f, 1.0f, 2000.0f);
 
-	//D3D.GetCBufferAllocator()->BindAndAttachData(0, m_camera);
+	D3D.GetCBufferAllocator()->BindAndAttachData(0, m_camera.GetStCam());
 }
