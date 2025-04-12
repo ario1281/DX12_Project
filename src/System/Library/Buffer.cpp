@@ -109,51 +109,6 @@ void CBufferAllocator::ResetCurrentUseNumber()
 	m_curUseNumber = 0;
 }
 
-template<typename T>
-inline void CBufferAllocator::BindAndAttachData(int dscIdx, const T& data)
-{
-	if (!m_pHeap) { return; }
-
-	// dataサイズを256アライメントして計算
-	size_t align = (sizeof(T) + 0xff) & ~0xff;
-
-	// 256byteをいくつ使用するかアライメントした結果を256で割って計算
-	int useValue = align / 0x100;
-
-	// 現在使い終わっている番号と今から使う容量がヒープの容量を超えている場合はリターン
-	if (m_curUseNumber + useValue > (int)m_pHeap->GetUseCount().x)
-	{
-		assert(0 && "使用できるヒープ容量を超えました");
-		return;
-	}
-
-	int top = m_curUseNumber;
-
-	// 先頭アドレスに使う分のポインタを足してmemcpy
-	memcpy(m_pMapBuffer + top, &data, sizeof(T));
-
-	// ビューを作って値をシェーダーにアタッチ
-	D3D12_CONSTANT_BUFFER_VIEW_DESC cbDesc = {};
-	cbDesc.BufferLocation = m_pBuffer->GetGPUVirtualAddress() + (UINT64)top * 0x100;
-	cbDesc.SizeInBytes = align;
-
-	//
-	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_pHeap->GetHeap()->GetCPUDescriptorHandleForHeapStart();
-	cpuHandle.ptr += (UINT64)DEV->GetDescriptorHandleIncrementSize
-	(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) *m_curUseNumber;
-
-	DEV->CreateConstantBufferView(&cbDesc, cpuHandle);
-
-	//
-	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle = m_pHeap->GetHeap()->GetGPUDescriptorHandleForHeapStart();
-	gpuHandle.ptr += (UINT64)DEV->GetDescriptorHandleIncrementSize
-	(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) *m_curUseNumber;
-
-	CMD->SetGraphicsRootDescriptorTable(dscIdx, gpuHandle);
-
-	m_curUseNumber += useValue;
-}
-
 #pragma endregion
 
 #pragma region Texture

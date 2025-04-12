@@ -101,12 +101,13 @@ using Vector4 = SimpleMath::Vector4;
 
 #include "Math.h"
 
+#include "CameraManager.h"
+
 #include "Direct3D12.h"
 #include "Heap.h"
 #include "Buffer.h"
 
 #include "SceneManager.h"
-#include"CameraManager.h"
 
 #include "Mesh.h"
 #include "Model.h"

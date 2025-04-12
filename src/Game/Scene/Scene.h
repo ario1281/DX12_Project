@@ -1,10 +1,10 @@
 #pragma once
 
-class GameScene : public SceneBase
+class Scene : public SceneBase
 {
 public:
-	GameScene() { Start(); }
-	~GameScene() {}
+	Scene() { Start(); }
+	~Scene() {}
 
 	void Start()	override;
 	bool Update()	override;

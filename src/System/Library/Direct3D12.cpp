@@ -1,6 +1,8 @@
 #include "define.h"
 #include "Direct3D12.h"
 
+#include "System/Library/Buffer.h"
+
 bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 {
 	#ifdef _DEBUG
@@ -15,16 +17,16 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	//=======================================================
 	// デバイスの作成
 	//=======================================================
-	if (!CreateDevice())
+	if (!CreateD3D12Device())
 	{
-		assert(0 && "コマンドリストの作成失敗");
+		assert(0 && "D3D12デバイス作成失敗");
 		return false;
 	}
 
 	//=======================================================
 	// コマンドリストの作成
 	//=======================================================
-	if (!CreateCommandList())
+	if (!CreateD3D12CmdList())
 	{
 		assert(0 && "コマンドリストの作成失敗");
 		return false;
@@ -33,7 +35,7 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	//=======================================================
 	// スワップチェインの作成
 	//=======================================================
-	if (!CreateSwapChain(hwnd, w, h))
+	if (!CreateDXGISwapChain(hwnd, w, h))
 	{
 		assert(0 && "スワップチェインの作成失敗");
 		return false;
@@ -154,12 +156,18 @@ void Direct3D12::WaitForCommandQueue()
 	}
 }
 
+void Direct3D12::SetCamera(const CameraManager& cam)
+{
+	m_camera = cam;
+	D3D.GetCBufferAllocator()->BindAndAttachData<CameraManager>(0, m_camera);
+}
 
 
-bool Direct3D12::CreateDevice()
+
+bool Direct3D12::CreateD3D12Device()
 {
 	HRESULT hr;
-	UINT flag = 0;
+	UINT    flag = 0;
 
 	com_ptr<IDXGIAdapter>              pAdapter;
 	std::vector<com_ptr<IDXGIAdapter>> pAdapters;
@@ -184,7 +192,10 @@ bool Direct3D12::CreateDevice()
 	#endif // _DEBUG
 
 	hr = CreateDXGIFactory2(flag, IID_PPV_ARGS(&m_pDxgiFactory));
-	if (FAILED(hr)) { return false; }
+	if (FAILED(hr))
+	{
+		return false;
+	}
 
 	for (UINT i = 0; true; ++i)
 	{
@@ -251,8 +262,7 @@ bool Direct3D12::CreateDevice()
 
 	return true;
 }
-
-bool Direct3D12::CreateCommandList()
+bool Direct3D12::CreateD3D12CmdList()
 {
 	HRESULT hr;
 
@@ -281,8 +291,7 @@ bool Direct3D12::CreateCommandList()
 
 	return true;
 }
-
-bool Direct3D12::CreateSwapChain(HWND hwnd, int width, int height)
+bool Direct3D12::CreateDXGISwapChain(HWND hwnd, int width, int height)
 {
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	desc.Width              = width;
@@ -310,7 +319,6 @@ bool Direct3D12::CreateSwapChain(HWND hwnd, int width, int height)
 
 	return true;
 }
-
 bool Direct3D12::CreateDescriptorHeap()
 {
 	m_upRTVHeap = std::make_unique<RTVHeap>();
@@ -331,7 +339,6 @@ bool Direct3D12::CreateDescriptorHeap()
 
 	return true;
 }
-
 bool Direct3D12::CreateSwapChainRTV()
 {
 	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
@@ -344,7 +351,6 @@ bool Direct3D12::CreateSwapChainRTV()
 
 	return true;
 }
-
 bool Direct3D12::CreateFence()
 {
 	auto hr = m_pDevice->CreateFence(m_fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence));
@@ -352,6 +358,7 @@ bool Direct3D12::CreateFence()
 
 	return true;
 }
+
 
 void Direct3D12::SetResourceBarrier(ID3D12Resource* pResource, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after)
 {

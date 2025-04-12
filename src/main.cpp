@@ -1,5 +1,6 @@
-#include"main.h"
+#include "main.h"
 
+#include "Game/Scene/Scene.h"
 
 int WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_  HINSTANCE hPrev, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
@@ -36,6 +37,14 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 {
 	// インスタンスハンドル記憶
 	APP.m_hInst = _hInst;
+
+	#ifdef _DEBUG
+	SetDllDirectoryA("Library/assimp/build/lib/Debug");
+	LoadLibraryExA("assimp-vc143-mtd.dll", NULL, NULL);
+	#else
+	SetDllDirectoryA("Library/assimp/build/lib/Release");
+	LoadLibraryExA("assimp-vc143-mt.dll", NULL, NULL);
+	#endif
 
 	//===================================================================
 	//　フルスクリーン確認
@@ -75,7 +84,7 @@ void System::Loop()
 
 	srand(baseTime);
 
-	m_Scene = new SceneBase();
+	m_Scene = new Scene();
 	SCENE.ChangeScene(m_Scene);
 
 	while (1)

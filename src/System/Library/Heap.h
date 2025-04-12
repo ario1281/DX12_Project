@@ -16,19 +16,20 @@ template<typename TempHeap>
 class BaseHeap
 {
 public:
-	BaseHeap() {}
 	~BaseHeap() {}
 
 	bool Create(HeapType heapType, TempHeap useCount)
 	{
-		auto type = static_cast<D3D12_DESCRIPTOR_HEAP_TYPE>(heapType);
+		auto type  = static_cast<D3D12_DESCRIPTOR_HEAP_TYPE>(heapType);
+		auto flags = heapType == HeapType::CSU ?
+			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE :
+			D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 		D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
 		heapDesc.Type           = type;
 		heapDesc.NodeMask       = 0;
 		heapDesc.NumDescriptors = ComputeUseCount(useCount);
-		heapDesc.Flags          = heapType == HeapType::CSU ?
-			D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+		heapDesc.Flags          = flags;
 
 		auto hr = DEV->CreateDescriptorHeap(
 			&heapDesc, IID_PPV_ARGS(&m_pHeap)

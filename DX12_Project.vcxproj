@@ -23,7 +23,7 @@
     <ClInclude Include="src\Game\GameWindow.h" />
     <ClInclude Include="src\Game\Object\CameraComponent.h" />
     <ClInclude Include="src\Game\SceneBase.h" />
-    <ClInclude Include="src\Game\Scene\GameScene.h" />
+    <ClInclude Include="src\Game\Scene\Scene.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\Pch.h" />
     <ClInclude Include="src\System\Library\Buffer.h" />
@@ -45,7 +45,7 @@
     <ClCompile Include="src\Game\GameWindow.cpp" />
     <ClCompile Include="src\Game\Object\ComeraComponent.cpp" />
     <ClCompile Include="src\Game\SceneBase.cpp" />
-    <ClCompile Include="src\Game\Scene\GameScene.cpp" />
+    <ClCompile Include="src\Game\Scene\Scene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
