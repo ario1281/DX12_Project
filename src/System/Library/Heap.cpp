@@ -11,7 +11,8 @@ int RTVHeap::CreateRTV(ID3D12Resource* pBuffer)
 		return 0;
 	}
 
-	auto handle = m_pHeap->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE handle;
+	handle = m_pHeap->GetCPUDescriptorHandleForHeapStart();
 	handle.ptr += (UINT64)m_nextRegistNumber * m_incrementSize;
 
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};

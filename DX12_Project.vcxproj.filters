@@ -87,6 +87,9 @@
     <ClInclude Include="src\System\Library\InputComponent.h">
       <Filter>src\System\Library</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceFactory.h">
+      <Filter>src\System\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -144,6 +147,9 @@
       <Filter>src\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Library\InputComponent.cpp">
+      <Filter>src\System\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceFactory.cpp">
       <Filter>src\System\Library</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,6 @@
 
 int WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_  HINSTANCE hPrev, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
-
 	// メモリリークを知らせる
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
@@ -37,14 +36,6 @@ bool System::Init(HINSTANCE _hInst, int _showCmd, int _w, int _h)
 {
 	// インスタンスハンドル記憶
 	APP.m_hInst = _hInst;
-
-	#ifdef _DEBUG
-	SetDllDirectoryA("Library/assimp/build/lib/Debug");
-	LoadLibraryExA("assimp-vc143-mtd.dll", NULL, NULL);
-	#else
-	SetDllDirectoryA("Library/assimp/build/lib/Release");
-	LoadLibraryExA("assimp-vc143-mt.dll", NULL, NULL);
-	#endif
 
 	//===================================================================
 	//　フルスクリーン確認

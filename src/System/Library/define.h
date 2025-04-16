@@ -76,20 +76,6 @@ using namespace DirectX;
 using Vector2 = SimpleMath::Vector2;
 using Vector4 = SimpleMath::Vector4;
 
-//===============================================
-//  
-//  assimp
-//  
-//===============================================
-//#ifdef _DEBUG
-//#pragma comment(lib, "assimp-vc143-mtd.lib")
-//#else
-//#pragma comment(lib, "assimp-vc143-mt.lib")
-//#endif // _DEBUG
-//
-//#include <assimp/Importer.hpp>
-//#include <assimp/scene.h>
-//#include <assimp/postprocess.h>
 
 //===============================================
 //  

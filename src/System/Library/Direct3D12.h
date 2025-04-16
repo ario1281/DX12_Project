@@ -71,9 +71,8 @@ private:
 	bool CreateD3D12CmdList();
 	bool CreateDXGISwapChain(HWND hwnd, int width, int height);
 	bool CreateDescriptorHeap();
-	bool CreateSwapChainRTV();
 
-	bool CreateFence();
+	bool CreateD3D12Fence();
 
 	void SetResourceBarrier(
 		ID3D12Resource*       pResource,
@@ -93,30 +92,30 @@ private:
 	};
 
 	// 
-	com_ptr<ID3D12Device8>                 m_pDevice       = nullptr;
-	com_ptr<IDXGIFactory7>                 m_pDxgiFactory  = nullptr;
+	com_ptr<ID3D12Device8>                 m_pDevice		= nullptr;
+	com_ptr<IDXGIFactory7>                 m_pDxgiFactory	= nullptr;
 
 	//
-	com_ptr<ID3D12CommandAllocator>        m_pCmdAllocator = nullptr;
-	com_ptr<ID3D12GraphicsCommandList7>    m_pCmdList      = nullptr;
-	com_ptr<ID3D12CommandQueue>            m_pCmdQueue     = nullptr;
+	com_ptr<ID3D12CommandAllocator>        m_pCmdAllocator	= nullptr;
+	com_ptr<ID3D12GraphicsCommandList7>    m_pCmdList		= nullptr;
+	com_ptr<ID3D12CommandQueue>            m_pCmdQueue		= nullptr;
 
 	//
-	com_ptr<IDXGISwapChain4>               m_pSwapChain    = nullptr;
+	com_ptr<IDXGISwapChain4>               m_pSwapChain		= nullptr;
 
 	//
 	std::array<com_ptr<ID3D12Resource>, 2> m_pSwapChainBuffers;
 
 	//
-	com_ptr<ID3D12Fence>                   m_pFence        = nullptr;
-	UINT64                                 m_fenceVal      = 0;
+	com_ptr<ID3D12Fence>                   m_pFence			= nullptr;
+	UINT64                                 m_fenceVal		= 0;
 
 	//
-	unique_ptr<RTVHeap>          m_upRTVHeap            = nullptr;
-	unique_ptr<CSUHeap>          m_upCSUHeap            = nullptr;
-	unique_ptr<DSVHeap>          m_upDSVHeap            = nullptr;
-	unique_ptr<DepthStencil>     m_upDepthStencil       = nullptr;
-	unique_ptr<CBufferAllocator> m_upBufferAllocater    = nullptr;
+	unique_ptr<RTVHeap>          m_upRTVHeap			= nullptr;
+	unique_ptr<CSUHeap>          m_upCSUHeap			= nullptr;
+	unique_ptr<DSVHeap>          m_upDSVHeap			= nullptr;
+	unique_ptr<DepthStencil>     m_upDepthStencil		= nullptr;
+	unique_ptr<CBufferAllocator> m_upBufferAllocater	= nullptr;
 
 	CameraManager m_camera;
 

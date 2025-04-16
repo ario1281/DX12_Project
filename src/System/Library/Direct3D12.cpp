@@ -33,18 +33,6 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	}
 
 	//=======================================================
-	// スワップチェインの作成
-	//=======================================================
-	if (!CreateDXGISwapChain(hwnd, w, h))
-	{
-		assert(0 && "スワップチェインの作成失敗");
-		return false;
-	}
-
-	// フルスクリーン
-	SetFullScreen(fullscreen);
-
-	//=======================================================
 	// ヒープの作成
 	//=======================================================
 	if (!CreateDescriptorHeap())
@@ -57,28 +45,31 @@ bool Direct3D12::Init(HINSTANCE hInst, HWND hwnd, int w, int h, bool fullscreen)
 	m_upBufferAllocater->Create(m_upCSUHeap.get());
 
 	//=======================================================
+	// スワップチェインの作成
+	//=======================================================
+	if (!CreateDXGISwapChain(hwnd, w, h))
+	{
+		assert(0 && "スワップチェインの作成失敗");
+		return false;
+	}
+
+	// フルスクリーン
+	SetFullScreen(fullscreen);
+
+	//=======================================================
 	// 深度テクスチャの作成
 	//=======================================================
 	m_upDepthStencil = std::make_unique<DepthStencil>();
 	if (!m_upDepthStencil->Create(Vector2((float)w, (float)h)))
 	{
-		assert(0 && "DepthStencilの作成失敗");
+		assert(0 && "深度テクスチャの作成失敗");
 		return false;
 	}
 
 	//=======================================================
-	// スワップチェインRTVの作成
+	// フェンスの作成
 	//=======================================================
-	if (!CreateSwapChainRTV())
-	{
-		assert(0 && "スワップチェインRTVの作成失敗");
-		return false;
-	}
-
-	//=======================================================
-	// スワップチェインRTVの作成
-	//=======================================================
-	if (!CreateFence())
+	if (!CreateD3D12Fence())
 	{
 		assert(0 && "フェンスの作成失敗");
 		return false;
@@ -191,11 +182,14 @@ bool Direct3D12::CreateD3D12Device()
 
 	#endif // _DEBUG
 
+	#pragma region ファクトリ作成
+
 	hr = CreateDXGIFactory2(flag, IID_PPV_ARGS(&m_pDxgiFactory));
-	if (FAILED(hr))
-	{
-		return false;
-	}
+	if (FAILED(hr)) { return false; }
+
+	#pragma endregion
+
+	#pragma region アダプタ作成
 
 	for (UINT i = 0; true; ++i)
 	{
@@ -250,15 +244,22 @@ bool Direct3D12::CreateD3D12Device()
 		}
 	}
 
+	#pragma endregion
+
+	#pragma region デバイス作成
+
 	D3D_FEATURE_LEVEL featLevel;
 	for (auto lv : levels)
 	{
 		if (D3D12CreateDevice(pAdapter.Get(), lv, IID_PPV_ARGS(&m_pDevice)) == S_OK)
 		{
+			// 生成可能なバージョンが見つかったらループ打ち切り
 			featLevel = lv;
-			break;          // 生成可能なバージョンが見つかったらループ打ち切り
+			break;
 		}
 	}
+
+	#pragma endregion
 
 	return true;
 }
@@ -293,6 +294,8 @@ bool Direct3D12::CreateD3D12CmdList()
 }
 bool Direct3D12::CreateDXGISwapChain(HWND hwnd, int width, int height)
 {
+	#pragma region スワップチェイン
+
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	desc.Width              = width;
 	desc.Height             = height;
@@ -303,7 +306,6 @@ bool Direct3D12::CreateDXGISwapChain(HWND hwnd, int width, int height)
 	desc.BufferCount        = 2;
 	desc.SwapEffect         = DXGI_SWAP_EFFECT_FLIP_DISCARD;          // フリップ後は速やかに破棄
 	desc.Flags              = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // ウィンドウとフルスクリーン切り替え可能
-
 
 	// スワップチェインの作成
 	IDXGISwapChain1* pSwapChain;
@@ -316,6 +318,20 @@ bool Direct3D12::CreateDXGISwapChain(HWND hwnd, int width, int height)
 	if (FAILED(hr)) { return false; }
 
 	pSwapChain->QueryInterface(IID_PPV_ARGS(&m_pSwapChain));
+
+	#pragma endregion
+
+	#pragma region スワップチェインバッファ
+
+	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
+	{
+		auto hr = m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffers[i]));
+		if (FAILED(hr)) { return false; }
+
+		m_upRTVHeap->CreateRTV(m_pSwapChainBuffers[i].Get());
+	}
+
+	#pragma endregion
 
 	return true;
 }
@@ -339,19 +355,7 @@ bool Direct3D12::CreateDescriptorHeap()
 
 	return true;
 }
-bool Direct3D12::CreateSwapChainRTV()
-{
-	for (UINT i = 0; i < (int)m_pSwapChainBuffers.size(); ++i)
-	{
-		auto hr = m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffers[i]));
-		if (FAILED(hr)) { return false; }
-
-		m_upRTVHeap->CreateRTV(m_pSwapChainBuffers[i].Get());
-	}
-
-	return true;
-}
-bool Direct3D12::CreateFence()
+bool Direct3D12::CreateD3D12Fence()
 {
 	auto hr = m_pDevice->CreateFence(m_fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence));
 	if (FAILED(hr)) { return false; }

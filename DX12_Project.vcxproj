@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ResourceFactory.h" />
     <ClInclude Include="src\Game\GameObject.h" />
     <ClInclude Include="src\Game\GameWindow.h" />
     <ClInclude Include="src\Game\Object\CameraComponent.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="src\System\Library\Shader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ResourceFactory.cpp" />
     <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\Game\GameWindow.cpp" />
     <ClCompile Include="src\Game\Object\ComeraComponent.cpp" />
@@ -169,7 +171,8 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <DelayLoadDLLs>assimp-vc143-mtd.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
     </Link>
     <FxCompile />
     <FxCompile />
@@ -218,7 +221,8 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\lib\DirectXTK12\lib\$(Platform)\$(Configuration);..\lib\DirectXTex\lib\$(Platform)\$(Configuration);..\lib\assimp\build\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <DelayLoadDLLs>assimp-vc143-mtd.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

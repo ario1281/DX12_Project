@@ -4,8 +4,8 @@
 
 enum class DepthStencilFormat
 {
-	DepthLowQuality = DXGI_FORMAT_R16_TYPELESS,
-	DepthHighQuality = DXGI_FORMAT_R32_TYPELESS,
+	DepthLowQuality            = DXGI_FORMAT_R16_TYPELESS,
+	DepthHighQuality           = DXGI_FORMAT_R32_TYPELESS,
 	DepthHighQualityAndStencil = DXGI_FORMAT_R24G8_TYPELESS,
 };
 
