@@ -29,7 +29,7 @@ private:
 	// 1つの頂点データ
 	struct VERTEX
 	{
-		Vector3 pos;     // 座標
+		Vector3   pos;     // 座標
 		DWORD     color;   // 色
 		XMFLOAT2  uv;      // UV座標
 	};
